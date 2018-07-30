@@ -15,17 +15,17 @@
       <file leaf-file-name="MapServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/MapServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-918">
-              <caret line="38" column="43" lean-forward="true" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="43" />
+            <state relative-caret-position="153">
+              <caret line="35" column="93" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="93" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Rasterer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Rasterer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
+            <state relative-caret-position="218">
+              <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3087#3088#0" expanded="true" />
@@ -38,17 +38,17 @@
       <file leaf-file-name="RasterRequestParams.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/RasterRequestParams.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="340">
               <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RasterResultParams.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RasterResultParams.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/RasterResultParams.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+            <state relative-caret-position="1462">
+              <caret line="99" column="45" lean-forward="true" selection-start-line="99" selection-start-column="45" selection-end-line="99" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -116,12 +116,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="bearmaps" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bearmaps" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -146,7 +140,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestRasterer">
+  <component name="RunManager" selected="Application.MapServer">
     <configuration name="MapServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MapServer" />
       <module name="bearmaps" />
@@ -216,8 +210,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestRasterer" />
         <item itemvalue="Application.MapServer" />
+        <item itemvalue="JUnit.TestRasterer" />
       </list>
     </recent_temporary>
   </component>
@@ -336,34 +330,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MapServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-918">
-          <caret line="38" column="43" lean-forward="true" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3087#3088#0" expanded="true" />
-            <element signature="e#3133#3134#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/RasterRequestParams.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="25" />
+        <state relative-caret-position="153">
+          <caret line="35" column="93" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="93" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/RasterResultParams.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+        <state relative-caret-position="1462">
+          <caret line="99" column="45" lean-forward="true" selection-start-line="99" selection-start-column="45" selection-end-line="99" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/RasterRequestParams.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3087#3088#0" expanded="true" />
+            <element signature="e#3133#3134#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

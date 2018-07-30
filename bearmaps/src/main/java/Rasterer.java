@@ -10,6 +10,8 @@ import java.util.HashSet;
 public class Rasterer {
     /** The max image depth level. */
     public static final int MAX_DEPTH = 7;
+
+    public static double ROOT_ULLAT = 37.892195547244356, ROOT_ULLON = -122.2998046875;
     public  ArrayList<Double> depth;
     public Rasterer(){
         depth=new ArrayList<>();
@@ -47,18 +49,25 @@ public class Rasterer {
         /* TODO: Make sure you can explain every part of the task before you begin.
          * Hint: Define additional classes to make it easier to pass around multiple values, and
          * define additional methods to make it easier to test and reason about code. */
-
-        double ullat= params.ullat;
-        double ullon=params.ullon;
+        double ullat= params.ullat;//upper left upprtdown
+        double ullon=params.ullon;//upper left leftright
         double lrlat=params.lrlat;
         double lrlon=params.lrlon;
         double w=params.w;
         double h=params.h;
         double CalDpp= lonDPP(lrlon,ullon,w);
-        if(compare(CalDpp)==-1) {
+        double dp=compare(CalDpp);
+
+        if(dp==-1) {
             return RasterResultParams.queryFailed();
         }
-        return
+        double intdepth=depth.indexOf(dp);
+        double[] upperleft=findLeftcorner(ullat,ullon,dp);
+        double[] lowerright=findRightcorner(lrlat,lrlon,dp);
+        String [][] grid=findGrid(upperleft,lowerright);
+
+
+        return new RasterResultParams.Builder(null,upperleft[1],upperleft[0],lowerright[1],lowerright[0],intdepth,true);
     }
 
     /**
@@ -92,6 +101,54 @@ public class Rasterer {
         return -1;
     }
     }
+
+    public double[] findLeftcorner(double tile_ullat,double tile_ullon,double dp){
+        double[] xy=new double[4];
+        double finaly=tile_ullat;
+        double finalx=tile_ullon;
+        double y=this.ROOT_ULLAT;
+        double x=this.ROOT_ULLON;
+        int i=0,j=0;
+        while(x<finalx){
+            x+=dp;
+            i++;
+        }
+        while(finaly<y){
+            y-=dp;
+            j++;
+        }
+        xy[0]=x-dp;
+        xy[1]=y+dp;
+        xy[2]=i-1;
+        xy[3]=j-1;
+
+            return xy;
+    }
+
+    public double[] findRightcorner(double tile_ullat,double tile_ullon,double dp){
+        double[] xy=new double[4];
+        double finalx=tile_ullat;
+        double finaly=tile_ullon;
+        double x=this.ROOT_ULLAT;
+        double y=this.ROOT_ULLON;
+        int i=0,j=0;
+        while(x<finalx){
+            x+=dp;
+            i++;
+        }
+        while(finaly<y){
+            y-=dp;
+            j++;
+        }
+        xy[0]=x;
+        xy[1]=y;
+        xy[2]=i;
+        xy[3]=j;
+        return xy;
+    }
+   // public String[][] findGrid(double[] ulc,double[] lrc){
+       // int row=(int)ulc[]
+   // }
 
 
 }
