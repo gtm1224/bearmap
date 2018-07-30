@@ -24,8 +24,8 @@
       <file leaf-file-name="Rasterer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
+            <state relative-caret-position="286">
+              <caret line="143" column="16" lean-forward="true" selection-start-line="143" selection-start-column="16" selection-end-line="143" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3087#3088#0" expanded="true" />
@@ -351,8 +351,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
+        <state relative-caret-position="286">
+          <caret line="143" column="16" lean-forward="true" selection-start-line="143" selection-start-column="16" selection-end-line="143" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3087#3088#0" expanded="true" />

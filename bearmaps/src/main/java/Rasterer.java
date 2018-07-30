@@ -127,10 +127,10 @@ public class Rasterer {
 
     public double[] findRightcorner(double tile_ullat,double tile_ullon,double dp){
         double[] xy=new double[4];
-        double finalx=tile_ullat;
-        double finaly=tile_ullon;
-        double x=this.ROOT_ULLAT;
-        double y=this.ROOT_ULLON;
+        double finaly=tile_ullat;
+        double finalx=tile_ullon;
+        double y=this.ROOT_ULLAT;
+        double x=this.ROOT_ULLON;
         int i=0,j=0;
         while(x<finalx){
             x+=dp;
