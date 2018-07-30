@@ -35,7 +35,7 @@ public class RasterResultParams {
         this(null, 0.0, 0.0, 0.0, 0.0, 0, false);
     }
 
-    private RasterResultParams(
+    public RasterResultParams(
             String[][] renderGrid,
             double rasterUlLon, double rasterUlLat, double rasterLrLon, double rasterLrLat,
             int depth, boolean querySuccess) {
