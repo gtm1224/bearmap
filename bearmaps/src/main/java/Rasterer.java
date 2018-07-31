@@ -14,16 +14,16 @@ public class Rasterer {
     public static double ROOT_ULLAT = 37.892195547244356, ROOT_ULLON = -122.2998046875,
     ROOT_LRLAT = 37.82280243352756,  ROOT_LRLON = -122.2119140625;
     public  ArrayList<Double> depth;
+    public static double converter=(ROOT_LRLON-ROOT_ULLON)/(ROOT_ULLAT-ROOT_LRLAT);
+
+
     public Rasterer(){
         depth=new ArrayList<>();
-        depth.add(0.000002682209014892578);//d7
-        depth.add(0.000005364418029785156);//d6
-        depth.add(0.000010728836059570312);
-        depth.add(0.000021457672119140625);//d4
-        depth.add(0.00004291534423828125);
-        depth.add(0.0000858306884765625);
-        depth.add(0.000171661376953125);
-        depth.add(0.00034332275390625);
+        for (int i = 0; i <=7; i++) {
+           double d=(ROOT_LRLON-ROOT_ULLON)/(256*Math.pow(2,i));
+           depth.add(i,d);
+           System.out.println(d);
+        }
     }
 
 
@@ -58,7 +58,9 @@ public class Rasterer {
         double h=params.h;
         double CalDpp= lonDPP(lrlon,ullon,w);
         double dp=compare(CalDpp);
-        System.out.println(dp);
+
+        System.out.println("thisis"+dp);
+        System.out.println("calculated"+CalDpp);
         if(dp==-1) {
             return RasterResultParams.queryFailed();
         }
@@ -79,28 +81,30 @@ public class Rasterer {
      * @return lonDPP
      */
     private double lonDPP(double lrlon, double ullon, double width) {
+        System.out.println("displayssssss"+(lrlon - ullon) / width);
         return (lrlon - ullon) / width;
     }
-
     //changed to use depth4;
     private double compare(double lonDPP ){
         System.out.println(lonDPP);
-        if (lonDPP <= depth.get(0)) {
+        if (lonDPP > depth.get(0)) {
             return depth.get(0);
-        } else if (lonDPP >depth.get(0)&& lonDPP <=depth.get(1) ) {
-            return depth.get(0);
-        } else if (lonDPP > depth.get(1) && lonDPP <= depth.get(2)) {
+        } else if (lonDPP >depth.get(1)&& lonDPP <=depth.get(0) ) {
             return depth.get(1);
-        } else if (lonDPP > depth.get(2) && lonDPP <=depth.get(3)) {
+        } else if (lonDPP > depth.get(2) && lonDPP <= depth.get(1)) {
             return depth.get(2);
-        } else if (lonDPP > depth.get(3) && lonDPP <=depth.get(4)) {
+        } else if (lonDPP > depth.get(3) && lonDPP <=depth.get(2)) {
             return depth.get(3);
-        } else if (lonDPP > depth.get(4) && lonDPP <=depth.get(5)) {
+        } else if (lonDPP > depth.get(4) && lonDPP <=depth.get(3)) {
             return depth.get(4);
-        } else if (lonDPP > depth.get(5) && lonDPP <=depth.get(6)){
+        } else if (lonDPP > depth.get(5) && lonDPP <=depth.get(4)) {
             return depth.get(5);
-        } else {
-        return -1;
+        } else if (lonDPP > depth.get(6) && lonDPP <=depth.get(5)){
+            return depth.get(6);
+        } else if(lonDPP>depth.get(7)&& lonDPP <=depth.get(6)) {
+            return depth.get(7);
+        }else{
+        return depth.get(7);
     }
     }
 
@@ -111,19 +115,20 @@ public class Rasterer {
         double y=this.ROOT_ULLAT;
         double x=this.ROOT_ULLON;
         int i=0,j=0;
-        while(x<finalx){
+        while(x<=finalx){
             x+=dp*256;
             //System.out.println(x);
             System.out.println(i);
+            System.out.println(x);
             i++;
         }
-        while(finaly<y){
-            y-=dp*256;
+        while(finaly<=y){
+            y-=dp*256/converter;
             System.out.println(y);
             j++;
         }
         xy[0]=x-dp*256;
-        xy[1]=y+dp*256;
+        xy[1]=y+dp*256/converter;
         xy[2]=i-1;
         xy[3]=j-1;
 
@@ -142,7 +147,7 @@ public class Rasterer {
             i++;
         }
         while(finaly<y){
-            y-=dp*256;
+            y-=dp*256/converter;
             j++;
         }
         xy[0]=x;
@@ -167,7 +172,8 @@ public class Rasterer {
         int starty=(int)ulc[3];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j <col ; j++) {
-                grid[i][j]=(dp+x+(startx+j)+y+(starty+i));
+                grid[i][j]=(dp+x+(startx+j)+y+(starty+i)+".png");
+                System.out.println(grid[i][j]);
             }
         }
         return grid;
