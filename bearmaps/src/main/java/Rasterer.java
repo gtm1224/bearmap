@@ -87,6 +87,7 @@ public class Rasterer {
         * Access library of sizes built in constructor*/
 
         //Write method to determine which difference to use
+        System.out.println();
         double latDiff = determineLatDiff(comp);
         double lonDiff = determineLonDiff(comp);
         System.out.println("This is latDiff " + latDiff);
@@ -137,7 +138,7 @@ public class Rasterer {
 
         //Now create grid
         int d = determineDepthForGrid(comp);
-        String[][] stringGrid = new String[SaveCounterRight-SaveCounterLeft][SaveCounterBottom-SaveCounterTop];
+        String[][] stringGrid = new String[SaveCounterBottom-SaveCounterTop][SaveCounterRight-SaveCounterLeft];
         int storeHorzIndex = 0;
         int storeVertIndex = 0;
         System.out.println("This is save counter left " + SaveCounterLeft);
@@ -155,9 +156,6 @@ public class Rasterer {
             }
             storeHorzIndex = 0;
             storeVertIndex++;
-            if (storeVertIndex == SaveCounterBottom-SaveCounterTop) {
-                break;
-            }
         }
         /*stringGrid[0][1] = "d4_x11_y3.png";
         stringGrid[0][2] = "d4_x12_y3.png";*/
@@ -166,6 +164,7 @@ public class Rasterer {
         System.out.println("rlrlat "+ rlrlat);
         System.out.println("rlrlon "+ rlrlon);
         System.out.println("rullat "+ rullat);
+        System.out.println();
         RasterResultParams.Builder returnVal = new RasterResultParams.Builder();
         returnVal.setRenderGrid(stringGrid);
         returnVal.setDepth(d);
