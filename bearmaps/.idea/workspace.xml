@@ -10,6 +10,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/bearmaps$GraphDBLauncher.ic" NAME="GraphDBLauncher Coverage Results" MODIFIED="1533156334703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
   <component name="FileEditorManager">
     <splitter split-orientation="horizontal" split-proportion="0.40485215">
       <split-first>
@@ -26,7 +29,7 @@
           <file leaf-file-name="CSCourseDBHandler.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/example/CSCourseDBHandler.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="164">
+                <state relative-caret-position="299">
                   <caret line="59" column="5" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
                 </state>
               </provider>
@@ -36,13 +39,20 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="GraphDB.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="GraphDB.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/GraphDB.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="199">
-                  <caret line="34" selection-start-line="34" selection-end-line="34" />
+                <state relative-caret-position="1085">
+                  <caret line="131" column="36" selection-start-line="131" selection-start-column="36" selection-end-line="131" selection-end-column="36" />
                   <folding>
-                    <element signature="class#Edge#0;class#GraphDB#0" />
+                    <element signature="e#2873#2874#0" expanded="true" />
+                    <element signature="e#2898#2899#0" expanded="true" />
+                    <element signature="e#4017#4018#0" expanded="true" />
+                    <element signature="e#4072#4073#0" expanded="true" />
+                    <element signature="e#4293#4294#0" expanded="true" />
+                    <element signature="e#4326#4327#0" expanded="true" />
+                    <element signature="e#4505#4506#0" expanded="true" />
+                    <element signature="e#4548#4549#0" expanded="true" />
                     <element signature="e#10125#10126#0" expanded="true" />
                     <element signature="e#10167#10168#0" expanded="true" />
                     <element signature="e#10258#10259#0" expanded="true" />
@@ -54,11 +64,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="GraphBuildingHandler.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="GraphBuildingHandler.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/GraphBuildingHandler.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="131" lean-forward="true" selection-start-line="131" selection-end-line="131" />
+                <state relative-caret-position="226">
+                  <caret line="168" selection-start-line="168" selection-end-line="168" />
                   <folding>
                     <element signature="docComment;method#GraphBuildingHandler#0;class#GraphBuildingHandler#0" />
                   </folding>
@@ -90,16 +100,17 @@
       <find>Node</find>
       <find>edge</find>
       <find>Edge</find>
+      <find>Way Name</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/Rasterer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GraphDB.java" />
         <option value="$PROJECT_DIR$/src/main/java/example/CSCourseDBHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/GraphDBLauncher.java" />
         <option value="$PROJECT_DIR$/src/main/java/GraphBuildingHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GraphDB.java" />
       </list>
     </option>
   </component>
@@ -111,10 +122,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
-    <option name="y" value="60" />
-    <option name="width" value="1595" />
-    <option name="height" value="970" />
+    <option name="x" value="254" />
+    <option name="y" value="27" />
+    <option name="width" value="989" />
+    <option name="height" value="555" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -347,7 +358,8 @@
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003791" side_tool="true" weight="0.47559056" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4996209" weight="0.3984252" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4996209" visible="true" weight="0.3984252" />
+      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.3297953" />
       <window_info anchor="bottom" id="Style Checker" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32913387" />
       <window_info id="Capture Tool" order="6" />
@@ -358,7 +370,7 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.42362204" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -401,7 +413,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="19" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/GraphBuildingHandler.java</url>
+          <line>161</line>
+          <properties />
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="25" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -596,7 +616,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/example/CSCourseDBHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
+        <state relative-caret-position="299">
           <caret line="59" column="5" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
         </state>
       </provider>
@@ -608,28 +628,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GraphBuildingHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="168" selection-start-line="168" selection-end-line="168" />
+          <folding>
+            <element signature="docComment;method#GraphBuildingHandler#0;class#GraphBuildingHandler#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GraphDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="1085">
+          <caret line="131" column="36" selection-start-line="131" selection-start-column="36" selection-end-line="131" selection-end-column="36" />
           <folding>
-            <element signature="class#Edge#0;class#GraphDB#0" />
+            <element signature="e#2873#2874#0" expanded="true" />
+            <element signature="e#2898#2899#0" expanded="true" />
+            <element signature="e#4017#4018#0" expanded="true" />
+            <element signature="e#4072#4073#0" expanded="true" />
+            <element signature="e#4293#4294#0" expanded="true" />
+            <element signature="e#4326#4327#0" expanded="true" />
+            <element signature="e#4505#4506#0" expanded="true" />
+            <element signature="e#4548#4549#0" expanded="true" />
             <element signature="e#10125#10126#0" expanded="true" />
             <element signature="e#10167#10168#0" expanded="true" />
             <element signature="e#10258#10259#0" expanded="true" />
             <element signature="e#10301#10302#0" expanded="true" />
             <element signature="e#10389#10390#0" expanded="true" />
             <element signature="e#10434#10435#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GraphBuildingHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="131" lean-forward="true" selection-start-line="131" selection-end-line="131" />
-          <folding>
-            <element signature="docComment;method#GraphBuildingHandler#0;class#GraphBuildingHandler#0" />
           </folding>
         </state>
       </provider>

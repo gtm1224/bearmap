@@ -20,9 +20,17 @@ import java.util.*;
 public class GraphDB {
 
     /* Implement constructors for previously designed Graph class. */
-    private HashMap<Long, Set<Long>> neighbors  = new HashMap<>();
-    private HashMap<Long, Set<Edge>> edges = new HashMap<>();
+
+    /* neighbors maps vertices iD to a map of neighboring vertices */
+    private HashMap<Long, Vertex> neighbors  = new HashMap<>();
+
+    /* edges maps vertices id to a map of its edges */
+    private HashMap<Long, Edge> edges = new HashMap<>();
+
+    /* allEdges contains all edges in graph (might not implement*/
     private TreeSet<Edge> allEdges = new TreeSet<>();
+
+    private HashMap<Long, Vertex> allVertices = new HashMap<>();
 
     /**
      * This constructor creates and starts an XML parser, cleans the nodes, and prepares the
@@ -52,6 +60,44 @@ public class GraphDB {
     }
 
     /**
+     * Add vertex (node) to graph if it doesn't already exist in graph.  Adopted from
+     * lab26 methods */
+    public void addVert (long vertID, double lat, double lon) {
+        if (neighbors.get(vertID) == null) {
+            neighbors.put(vertID, new Vertex(lon, lat, vertID));
+        }
+    }
+
+    public void removeVert (long vertID) {
+        if (neighbors.get(vertID) == null) {
+            System.out.println("Vertex does not exist in graph");
+        } else {
+            neighbors.remove(vertID);
+        }
+    }
+
+    public void addVertHelper(Vertex vert) {
+        addVert(vert.vertID, vert.lat, vert.lon);
+    }
+    public void addEdge (long vertID1, long vertID2, double weight) {
+        addVertHelper(allVertices.get(vertID1)); // add vertices if they don't already exist
+        addVertHelper(allVertices.get(vertID2)); //
+        Edge e1 = new Edge(vertID1, vertID2, weight);
+        Edge e2 = new Edge(vertID2, vertID1, weight);
+        edges.put(vertID1,e1);
+        edges.put(vertID2,e2);
+    }
+
+    public TreeSet<Long> getAllVert() {
+        TreeSet<Long> setRet =  new TreeSet<>();
+        setRet = (TreeSet<Long>) neighbors.keySet();
+        return setRet;
+    }
+
+
+
+
+    /**
      * Remove nodes with no connections from the graph.
      * While this does not guarantee that any two nodes in the remaining graph are connected,
      * we can reasonably assume this since typically roads are connected.
@@ -66,8 +112,7 @@ public class GraphDB {
      * @return The longitude of that vertex, or 0.0 if the vertex is not in the graph.
      */
     double lon(long v) {
-        // TODO
-        return 0;
+        return allVertices.get(v).lon;
     }
 
     /**
@@ -76,8 +121,7 @@ public class GraphDB {
      * @return The latitude of that vertex, or 0.0 if the vertex is not in the graph.
      */
     double lat(long v) {
-        // TODO
-        return 0;
+        return allVertices.get(v).lat;
     }
 
     /**
@@ -85,8 +129,7 @@ public class GraphDB {
      * @return An iterable of all vertex IDs in the graph.
      */
     Iterable<Long> vertices() {
-        // TODO
-        return Collections.emptySet();
+        return allVertices.keySet();
     }
 
     /**
@@ -253,7 +296,10 @@ public class GraphDB {
             this.weight = weight;
         }
 
+        /* Adds an edge between two vertices */
+        public void addEdge(long src, long dest, double weight) {
 
+        }
         /* Returns the edge's source node. */
         public long getSource() {
             return src;

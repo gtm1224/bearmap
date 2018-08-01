@@ -45,7 +45,7 @@ public class GraphBuildingHandler extends DefaultHandler {
     private String roadType;
     private HashSet<Long> wayNodes;
     private ArrayList<Long> prevNodesWithinWay;
-    boolean validWay;
+    private boolean validWay = false; // Default valid way as false to ensure no improper connections are made
 
     /**
      * Create a new GraphBuildingHandler.
@@ -95,6 +95,7 @@ public class GraphBuildingHandler extends DefaultHandler {
             nodeID = Long.parseLong(attributes.getValue("id"));
             nodeLon = Double.parseDouble(attributes.getValue("lon"));
             nodeLat = Double.parseDouble(attributes.getValue("lat"));
+            GraphDB.Vertex vertAdd = new GraphDB.Vertex(nodeLon,nodeLat,nodeID);
             prevNodesWithinWay.add(nodeID); //last node is item at last index
             validWay = false;
 
@@ -129,7 +130,6 @@ public class GraphBuildingHandler extends DefaultHandler {
                 if (ALLOWED_HIGHWAY_TYPES.contains(v)) {
                     validWay = true; // Dont need to worry about areas since this case takes care of them
                 }
-
             } else if (k.equals("name")) {
                 System.out.println("Way Name: " + v);
             }
@@ -165,7 +165,10 @@ public class GraphBuildingHandler extends DefaultHandler {
 
             /* Hint: If you have stored the possible connections for this way, here's your chance to
              * actually connect the nodes together if the way is valid. */
+            if (validWay == true) {
+                //connect the nodes together
 
+            }
             // System.out.println("Finishing a way...");
         }
     }
