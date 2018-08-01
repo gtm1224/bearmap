@@ -6,8 +6,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Graph for storing all of the intersection (vertex) and road (edge) information.
@@ -19,11 +18,18 @@ import java.util.List;
  * @author Kevin Lowe, Antares Chen, Kevin Lin
  */
 public class GraphDB {
+
+    /* Implement constructors for previously designed Graph class. */
+    private HashMap<Long, Set<Long>> neighbors  = new HashMap<>();
+    private HashMap<Long, Set<Edge>> edges = new HashMap<>();
+    private TreeSet<Edge> allEdges = new TreeSet<>();
+
     /**
      * This constructor creates and starts an XML parser, cleans the nodes, and prepares the
      * data structures for processing. Modify this constructor to initialize your data structures.
      * @param dbPath Path to the XML file to be parsed.
      */
+
     public GraphDB(String dbPath) {
         File inputFile = new File(dbPath);
         try (FileInputStream inputStream = new FileInputStream(inputFile)) {
@@ -210,4 +216,79 @@ public class GraphDB {
      * @source https://gis.stackexchange.com/a/7298
      */
     private static final double K0 = 1.0;
+
+    /** Add Sub-Classes to make storage and other processes easier.  Consider classes
+     *  encountered before.  An Edge and Node(Vertex Class) seem most helpful.  Use
+     *  Vertex sub-class, consider values needed
+     *  lon, lat, id.
+     *  Include Edge subclass to make the formation of edges easier*/
+
+    static class Vertex { //note vertex is equivalent to node
+        double lon;
+        double lat;
+        long vertID;
+        HashSet<Edge> neighbors;
+
+        Vertex(double lon, double lat, long vertID) {
+            this.lon = lon;
+            this.lat = lat;
+            this.vertID = vertID;
+            this.neighbors = new HashSet<Edge>();
+        }
+    }
+    static class Edge implements Comparable<Edge>{
+        /* Note that all roads are considered two way.  We can therefore
+        * thinks of "roads" as undirected edges. Only need two vertices
+        * Designate vertOne and vertTwo
+        * Implement Comparable to allow for easier sorting later when
+        * finding shortest path*/
+
+        long src;
+        long dest;
+        double weight;
+
+        Edge(long src, long dest, double weight) {
+            this.src = src;
+            this.dest = dest;
+            this.weight = weight;
+        }
+
+
+        /* Returns the edge's source node. */
+        public long getSource() {
+            return src;
+        }
+
+        /* Returns the edge's destination node. */
+        public long getDest() {
+            return dest;
+        }
+
+        /* Returns the weight of the edge. */
+        public double getWeight() {
+            return weight;
+        }
+
+        public int compareTo(Edge other) {
+            double cmp =  weight - other.weight;
+            return (int) Math.round(cmp);
+        }
+
+        /* Returns true if two Edges have the same source, destination, and
+           weight. */
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            } else if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+
+            Edge e = (Edge) o;
+            return (src == e.src && dest == e.dest && weight == e.weight)
+                    || (src == e.dest && dest == e.src && weight == e.weight);
+        }
+
+        /* Returns the hashcode for this instance. */
+
+    }
 }

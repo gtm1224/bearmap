@@ -142,23 +142,17 @@ public class Rasterer {
         int storeHorzIndex = 0;
         int storeVertIndex = 0;
         System.out.println("This is save counter left " + SaveCounterLeft);
-        System.out.println("This is save counter right" + SaveCounterRight);
+        System.out.println("This is save counter right " + SaveCounterRight);
         System.out.println("This is save counter top " + SaveCounterTop);
-        System.out.println("This is save counter bottom" + SaveCounterBottom);
+        System.out.println("This is save counter bottom " + SaveCounterBottom);
         for (int j = SaveCounterLeft; j < SaveCounterRight; j++) {
             for (int i = SaveCounterTop; i < SaveCounterBottom; i++ ) {
                 stringGrid[storeHorzIndex][storeVertIndex] = "d" + d + "_x" + j + "_y" + i + ".png";
                 storeHorzIndex++;
-                /*if (storeHorzIndex == SaveCounterRight-SaveCounterLeft) {
-                    System.out.println("First For Loop broken");
-                    break;
-                }*/
             }
             storeHorzIndex = 0;
             storeVertIndex++;
         }
-        /*stringGrid[0][1] = "d4_x11_y3.png";
-        stringGrid[0][2] = "d4_x12_y3.png";*/
 
         System.out.println("rullon "+ rullon);
         System.out.println("rlrlat "+ rlrlat);
