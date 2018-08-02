@@ -85,8 +85,11 @@ public class GraphDB {
         addVert(vert.vertID, vert.lat, vert.lon);
     }
 
+    public void addEdgeHelper(Edge e) {
+        addEdge(e.src,e.dest,e.weight);
+    }
+
     public void addEdge (long vertID1, long vertID2, double weight) {
-        System.out.println("add Edge has been called with vertID1 = " + vertID1 +" vertID2 = " + vertID2 );
         addVertHelper(neighbors.get(vertID1)); // add vertices if they don't already exist
         addVertHelper(neighbors.get(vertID2)); //
         Edge e1 = new Edge(vertID1, vertID2, weight);
@@ -99,6 +102,9 @@ public class GraphDB {
         neighbors.get(vertID2).vertNeighbors.add(vertID1);
     }
 
+    public TreeSet<Edge> getAllEdges() {
+        return allEdges;
+    }
     public TreeSet<Long> getAllVert() {
         return new TreeSet<Long>(neighbors.keySet());
     }
@@ -110,9 +116,9 @@ public class GraphDB {
      */
     private void clean() {
         ArrayList<Long> removeIDs = new ArrayList<>();
-        for (Long vertiecs: vertices()) {
-            if (neighbors.get(vertiecs).vertNeighbors.isEmpty()) {
-                removeIDs.add(vertiecs);
+        for (Long vertices: vertices()) {
+            if (neighbors.get(vertices).vertNeighbors.isEmpty()) {
+                removeIDs.add(vertices);
             }
         }
         for (Long vertIDRemove: removeIDs) {
@@ -143,7 +149,6 @@ public class GraphDB {
      * @return An iterable of all vertex IDs in the graph.
      */
     Iterable<Long> vertices() {
-        System.out.println(neighbors.keySet());
         return neighbors.keySet();
     }
 

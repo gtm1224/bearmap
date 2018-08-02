@@ -91,7 +91,6 @@ public class GraphBuildingHandler extends DefaultHandler {
             nodeLat = Double.parseDouble(attributes.getValue("lat"));
             GraphDB.Vertex vertAdd = new GraphDB.Vertex(nodeLon,nodeLat,nodeID);
             g.addVertHelper(vertAdd);
-            System.out.println("Added vert with ID " + nodeID);
             prevNodes.add(nodeID);
 
         } else if (qName.equals("way")) {
@@ -100,10 +99,10 @@ public class GraphBuildingHandler extends DefaultHandler {
             // System.out.println("Beginning a way...");
         } else if (activeState.equals("way") && qName.equals("nd")) {
             /* While looking at a way, found a <nd...> tag. */
-            System.out.println("Node id in this way: " + attributes.getValue("ref"));
+            //System.out.println("Node id in this way: " + attributes.getValue("ref"));
             prevNodesWithinWay.add(Long.parseLong(attributes.getValue("ref")));
-            System.out.println(prevNodesWithinWay);
-            /* TODO: Use the above id to make "possible" connections between the nodes in this way.
+            //System.out.println(prevNodesWithinWay);
+            /*
              * Hint 1: It would be useful to remember what was the last node in this way.
              * Hint 2: Not all ways are valid. So, directly connecting the nodes here would be
                cumbersome since you might have to remove the connections if you later see a tag that
@@ -124,9 +123,9 @@ public class GraphBuildingHandler extends DefaultHandler {
                     validWay = true; // Dont need to worry about areas since this case takes care of them
                 }
             } else if (k.equals("name")) {
-                System.out.println("Way Name: " + v);
+                //System.out.println("Way Name: " + v);
             }
-            System.out.println("Tag with k=" + k + ", v=" + v + ".");
+            //System.out.println("Tag with k=" + k + ", v=" + v + ".");
         } else if (activeState.equals("node") && qName.equals("tag") && attributes.getValue("k")
                 .equals("name")) {
             /* While looking at a node, found a <tag...> with k="name". */
@@ -134,7 +133,7 @@ public class GraphBuildingHandler extends DefaultHandler {
              * node this tag belongs to. Remember XML is parsed top-to-bottom, so probably it's the
              * last node that you looked at (check the first if-case). */
             //System.out.println("Node's name: " + attributes.getValue("v"));
-            GraphDB.Vertex grabbedVert = g.getVert(prevNodes.get(prevNodes.size()-1));
+            GraphDB.Vertex grabbedVert = g.getVert(nodeID);
             grabbedVert.vertName = attributes.getValue("v");
         }
     }
@@ -161,17 +160,19 @@ public class GraphBuildingHandler extends DefaultHandler {
                 for (int i = 0; i < prevNodesWithinWay.size()-1; i++) {
                     long vertID1 = prevNodesWithinWay.get(i);
                     long vertID2 = prevNodesWithinWay.get(i+1);
-                    g.addEdge(vertID1,vertID2, g.distance(vertID1,vertID2));
+                    GraphDB.Edge e1 = new GraphDB.Edge(vertID1,vertID2, g.distance(vertID1,vertID2));
+                    g.addEdgeHelper(e1);
                 }
                 /*long secondToLast = prevNodesWithinWay.get(prevNodesWithinWay.size()-2);
                 long Last = prevNodesWithinWay.get(prevNodesWithinWay.size()-1);
                 g.addEdge(secondToLast,Last,g.distance(secondToLast,Last));*/
-                prevNodesWithinWay.clear();
+                prevNodesWithinWay = new ArrayList<>();
+                validWay = false;
 
             }
             // System.out.println("Finishing a way...");
         }
-        prevNodes.clear();
+        prevNodes = new ArrayList<>();
     }
 
 }

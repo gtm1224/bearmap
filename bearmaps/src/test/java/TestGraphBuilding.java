@@ -12,8 +12,8 @@ import static org.junit.Assert.assertEquals;
 public class TestGraphBuilding {
     private static GraphDB graph;
     private static GraphDB graphSmall;
-    private static final String OSM_DB_PATH = "../library-su18/bearmaps/berkeley-2018.osm.xml";
-    private static final String OSM_DB_PATH_SMALL = "../library-su18/bearmaps/berkeley-2018-small.osm.xml";
+    private static final String OSM_DB_PATH = "/home/charles/Documents/su18-c-m-johnson/library-su18/bearmaps/berkeley-2018.osm.xml";
+    private static final String OSM_DB_PATH_SMALL = "/home/charles/Documents/su18-c-m-johnson/library-su18/bearmaps/berkeley-2018-small.osm.xml";
     private static boolean initialized = false;
 
     /**
