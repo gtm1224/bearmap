@@ -87,10 +87,10 @@ public class GraphBuildingHandler extends DefaultHandler {
             /* Encountering a new <way...> tag. */
             activeState = "way";
             way= new ArrayList<>();
-             System.out.println("Beginning a way...");
+             //System.out.println("Beginning a way...");
         } else if (activeState.equals("way") && qName.equals("nd")) {
             /* While looking at a way, found a <nd...> tag. */
-             System.out.println("Node id in this way: " + attributes.getValue("ref"));
+             //System.out.println("Node id in this way: " + attributes.getValue("ref"));
              long ID = Long.parseLong(attributes.getValue("ref"));
              way.add(ID);
 
@@ -106,12 +106,12 @@ public class GraphBuildingHandler extends DefaultHandler {
             String k = attributes.getValue("k");
             String v = attributes.getValue("v");
             if (k.equals("maxspeed")) {
-                 System.out.println("Max Speed: " + v);
+                 //System.out.println("Max Speed: " + v);
                  speed=v;
                 /* TODO: Set the max speed of the "current way" here. */
 
             } else if (k.equals("highway")) {
-                System.out.println("Highway type: " + v);
+               // System.out.println("Highway type: " + v);
                 if (ALLOWED_HIGHWAY_TYPES.contains(v)){
                     flag=true;
                 }
@@ -119,7 +119,7 @@ public class GraphBuildingHandler extends DefaultHandler {
                  * Hint: Set a "flag". */
 
             } else if (k.equals("name")) {
-                 System.out.println("Way Name: " + v);
+                 //System.out.println("Way Name: " + v);
             }
             // System.out.println("Tag with k=" + k + ", v=" + v + ".");
         } else if (activeState.equals("node") && qName.equals("tag") && attributes.getValue("k")
@@ -131,7 +131,7 @@ public class GraphBuildingHandler extends DefaultHandler {
              * node this tag belongs to. Remember XML is parsed top-to-bottom, so probably it's the
              * last node that you looked at (check the first if-case). */
 
-             System.out.println("Node's name: " + attributes.getValue("v"));
+             //System.out.println("Node's name: " + attributes.getValue("v"));
         }
     }
 
@@ -160,7 +160,7 @@ public class GraphBuildingHandler extends DefaultHandler {
             }
             flag=false;
             activeState = "";
-             System.out.println("Finishing a way...");
+             //System.out.println("Finishing a way...");
         }
     }
 

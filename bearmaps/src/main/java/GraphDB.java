@@ -6,11 +6,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.HashSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Graph for storing all of the intersection (vertex) and road (edge) information.
@@ -69,11 +65,16 @@ public class GraphDB {
      * we can reasonably assume this since typically roads are connected.
      */
     private void clean() {
-      for(long nodeid: neighbors.keySet()){
+        ArrayList<Long> removeID=new ArrayList<>();
+        for(long nodeid: neighbors.keySet()){
           if(neighbors.get(nodeid).isEmpty()){
-              neighbors.remove(nodeid);
-              edges.remove(nodeid);
+              removeID.add(nodeid);
           }
+      }
+      for(long nodeid : removeID){
+            neighbors.remove(nodeid);
+            IDtoNode.remove(nodeid);
+            edges.remove(nodeid);
       }
     }
 
