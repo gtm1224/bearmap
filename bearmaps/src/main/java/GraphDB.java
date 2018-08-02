@@ -30,7 +30,6 @@ public class GraphDB {
     /* allEdges contains all edges in graph (might not implement*/
     private TreeSet<Edge> allEdges = new TreeSet<>();
 
-    private HashMap<Long, Vertex> allVertices = new HashMap<>();
 
     /**
      * This constructor creates and starts an XML parser, cleans the nodes, and prepares the
@@ -67,35 +66,42 @@ public class GraphDB {
             neighbors.put(vertID, new Vertex(lon, lat, vertID));
         }
     }
-
+    /** Return vertex given vertID*/
+    public Vertex getVert(long vertID) {
+        return neighbors.get(vertID);
+    }
+    /** removeVert removes from neighbors HashMap and allVertices HashMap*/
     public void removeVert (long vertID) {
         if (neighbors.get(vertID) == null) {
             System.out.println("Vertex does not exist in graph");
         } else {
             neighbors.remove(vertID);
+            //allEdges.remove(edges.get(vertID));
+            //edges.remove(vertID);
         }
     }
 
     public void addVertHelper(Vertex vert) {
         addVert(vert.vertID, vert.lat, vert.lon);
     }
+
     public void addEdge (long vertID1, long vertID2, double weight) {
-        addVertHelper(allVertices.get(vertID1)); // add vertices if they don't already exist
-        addVertHelper(allVertices.get(vertID2)); //
+        System.out.println("add Edge has been called with vertID1 = " + vertID1 +" vertID2 = " + vertID2 );
+        addVertHelper(neighbors.get(vertID1)); // add vertices if they don't already exist
+        addVertHelper(neighbors.get(vertID2)); //
         Edge e1 = new Edge(vertID1, vertID2, weight);
         Edge e2 = new Edge(vertID2, vertID1, weight);
         edges.put(vertID1,e1);
         edges.put(vertID2,e2);
+        allEdges.add(e1);
+        allEdges.add(e2);
+        neighbors.get(vertID1).vertNeighbors.add(vertID2);
+        neighbors.get(vertID2).vertNeighbors.add(vertID1);
     }
 
     public TreeSet<Long> getAllVert() {
-        TreeSet<Long> setRet =  new TreeSet<>();
-        setRet = (TreeSet<Long>) neighbors.keySet();
-        return setRet;
+        return new TreeSet<Long>(neighbors.keySet());
     }
-
-
-
 
     /**
      * Remove nodes with no connections from the graph.
@@ -103,7 +109,15 @@ public class GraphDB {
      * we can reasonably assume this since typically roads are connected.
      */
     private void clean() {
-        // TODO
+        ArrayList<Long> removeIDs = new ArrayList<>();
+        for (Long vertiecs: vertices()) {
+            if (neighbors.get(vertiecs).vertNeighbors.isEmpty()) {
+                removeIDs.add(vertiecs);
+            }
+        }
+        for (Long vertIDRemove: removeIDs) {
+            removeVert(vertIDRemove);
+        }
     }
 
     /**
@@ -112,7 +126,7 @@ public class GraphDB {
      * @return The longitude of that vertex, or 0.0 if the vertex is not in the graph.
      */
     double lon(long v) {
-        return allVertices.get(v).lon;
+        return neighbors.get(v).lon;
     }
 
     /**
@@ -121,7 +135,7 @@ public class GraphDB {
      * @return The latitude of that vertex, or 0.0 if the vertex is not in the graph.
      */
     double lat(long v) {
-        return allVertices.get(v).lat;
+        return neighbors.get(v).lat;
     }
 
     /**
@@ -129,7 +143,8 @@ public class GraphDB {
      * @return An iterable of all vertex IDs in the graph.
      */
     Iterable<Long> vertices() {
-        return allVertices.keySet();
+        System.out.println(neighbors.keySet());
+        return neighbors.keySet();
     }
 
     /**
@@ -139,8 +154,11 @@ public class GraphDB {
      * iterable if the vertex is not in the graph.
      */
     Iterable<Long> adjacent(long v) {
-        // TODO
-        return Collections.emptySet();
+        if (neighbors.containsKey(v)) {
+            return neighbors.get(v).vertNeighbors;
+        } else {
+            return Collections.emptySet();
+        }
     }
 
     /**
@@ -170,8 +188,23 @@ public class GraphDB {
      * @return The ID for the vertex closest to the <code>lon</code> and <code>lat</code>.
      */
     public long closest(double lon, double lat) {
-        // TODO
-        return 0;
+        long currMinID = getAllVert().first(); // Create a first vertex to compare against
+        Vertex tempVert = new Vertex(lon, lat, (long) Math.abs(lat+lon)); // Create a temporary vertex so we can use
+        // the given distance method
+        addVertHelper(tempVert); // add temporary vertex to graph
+        double currMinDistance = distance(currMinID,tempVert.vertID);
+        for (Long vertexID: vertices()) {
+            if (vertexID == tempVert.vertID) {
+                continue; //ignore temporary vertex
+            }
+            double cmp = distance(vertexID,tempVert.vertID);
+            if (cmp < currMinDistance) {
+                currMinDistance = cmp;
+                currMinID = vertexID;
+            }
+        }
+        removeVert(tempVert.vertID); //remove temporary vertex
+        return currMinID;
     }
 
     /**
@@ -270,13 +303,14 @@ public class GraphDB {
         double lon;
         double lat;
         long vertID;
-        HashSet<Edge> neighbors;
+        String vertName;
+        HashSet<Long> vertNeighbors;
 
         Vertex(double lon, double lat, long vertID) {
             this.lon = lon;
             this.lat = lat;
             this.vertID = vertID;
-            this.neighbors = new HashSet<Edge>();
+            this.vertNeighbors= new HashSet<Long>();
         }
     }
     static class Edge implements Comparable<Edge>{

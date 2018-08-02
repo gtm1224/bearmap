@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class TestGraphBuildingTiny {
     private static GraphDB graphTiny;
-    private static final String OSM_DB_PATH_TINY = "../library-su18/bearmaps/tiny-clean.osm.xml";
+    private static final String OSM_DB_PATH_TINY = "/home/charles/Documents/su18-c-m-johnson/library-su18/bearmaps/tiny-clean.osm.xml";
     private static boolean initialized = false;
 
     /**

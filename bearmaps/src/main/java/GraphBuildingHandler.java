@@ -42,9 +42,8 @@ public class GraphBuildingHandler extends DefaultHandler {
     private double nodeLon;
     private double nodeLat;
     private long nodeID;
-    private String roadType;
-    private HashSet<Long> wayNodes;
-    private ArrayList<Long> prevNodesWithinWay;
+    private ArrayList<Long> prevNodes = new ArrayList<>();
+    private ArrayList<Long> prevNodesWithinWay = new ArrayList<>(); //make separate array list for when considering ways
     private boolean validWay = false; // Default valid way as false to ensure no improper connections are made
 
     /**
@@ -82,25 +81,18 @@ public class GraphBuildingHandler extends DefaultHandler {
         if (qName.equals("node")) {
             /* Encountering a new <node...> tag. */
             activeState = "node";
-            prevNodesWithinWay = new ArrayList<>();
             // System.out.println("Node id: " + attributes.getValue("id"));
             // System.out.println("Node lon: " + attributes.getValue("lon"));
             // System.out.println("Node lat: " + attributes.getValue("lat"));
-
-            /* TODO: Use the above information to save a "node" to somewhere.
-             * Hint: A graph-like structure would be nice. */
-
             /* We know we need lat lon and id of node so store this here.  Put node in graph
             *  Nodes are connected by ways which we encounter next */
             nodeID = Long.parseLong(attributes.getValue("id"));
             nodeLon = Double.parseDouble(attributes.getValue("lon"));
             nodeLat = Double.parseDouble(attributes.getValue("lat"));
             GraphDB.Vertex vertAdd = new GraphDB.Vertex(nodeLon,nodeLat,nodeID);
-            prevNodesWithinWay.add(nodeID); //last node is item at last index
-            validWay = false;
-
-            /* Note we don't add immediately to graph because we might not want to track this
-             * particular Node */
+            g.addVertHelper(vertAdd);
+            System.out.println("Added vert with ID " + nodeID);
+            prevNodes.add(nodeID);
 
         } else if (qName.equals("way")) {
             /* Encountering a new <way...> tag. */
@@ -108,8 +100,9 @@ public class GraphBuildingHandler extends DefaultHandler {
             // System.out.println("Beginning a way...");
         } else if (activeState.equals("way") && qName.equals("nd")) {
             /* While looking at a way, found a <nd...> tag. */
-            //System.out.println("Node id in this way: " + attributes.getValue("ref"));
+            System.out.println("Node id in this way: " + attributes.getValue("ref"));
             prevNodesWithinWay.add(Long.parseLong(attributes.getValue("ref")));
+            System.out.println(prevNodesWithinWay);
             /* TODO: Use the above id to make "possible" connections between the nodes in this way.
              * Hint 1: It would be useful to remember what was the last node in this way.
              * Hint 2: Not all ways are valid. So, directly connecting the nodes here would be
@@ -137,13 +130,12 @@ public class GraphBuildingHandler extends DefaultHandler {
         } else if (activeState.equals("node") && qName.equals("tag") && attributes.getValue("k")
                 .equals("name")) {
             /* While looking at a node, found a <tag...> with k="name". */
-
-            /* TODO: Create a location.
-             * Hint: Since we found this <tag...> INSIDE a node, we should probably remember which
+            /* Hint: Since we found this <tag...> INSIDE a node, we should probably remember which
              * node this tag belongs to. Remember XML is parsed top-to-bottom, so probably it's the
              * last node that you looked at (check the first if-case). */
-
             //System.out.println("Node's name: " + attributes.getValue("v"));
+            GraphDB.Vertex grabbedVert = g.getVert(prevNodes.get(prevNodes.size()-1));
+            grabbedVert.vertName = attributes.getValue("v");
         }
     }
 
@@ -165,12 +157,21 @@ public class GraphBuildingHandler extends DefaultHandler {
 
             /* Hint: If you have stored the possible connections for this way, here's your chance to
              * actually connect the nodes together if the way is valid. */
-            if (validWay == true) {
-                //connect the nodes together
+            if (validWay) {
+                for (int i = 0; i < prevNodesWithinWay.size()-1; i++) {
+                    long vertID1 = prevNodesWithinWay.get(i);
+                    long vertID2 = prevNodesWithinWay.get(i+1);
+                    g.addEdge(vertID1,vertID2, g.distance(vertID1,vertID2));
+                }
+                /*long secondToLast = prevNodesWithinWay.get(prevNodesWithinWay.size()-2);
+                long Last = prevNodesWithinWay.get(prevNodesWithinWay.size()-1);
+                g.addEdge(secondToLast,Last,g.distance(secondToLast,Last));*/
+                prevNodesWithinWay.clear();
 
             }
             // System.out.println("Finishing a way...");
         }
+        prevNodes.clear();
     }
 
 }
