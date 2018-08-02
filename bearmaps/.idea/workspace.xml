@@ -18,8 +18,8 @@
       <file leaf-file-name="GraphBuildingHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/GraphBuildingHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="101" column="12" lean-forward="true" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="12" />
+            <state relative-caret-position="250">
+              <caret line="174" column="51" selection-start-line="174" selection-start-column="51" selection-end-line="174" selection-end-column="51" />
               <folding>
                 <element signature="docComment;method#GraphBuildingHandler#0;class#GraphBuildingHandler#0" />
               </folding>
@@ -30,8 +30,8 @@
       <file leaf-file-name="GraphDB.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/GraphDB.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-150">
-              <caret line="99" column="16" lean-forward="true" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="16" />
+            <state relative-caret-position="240">
+              <caret line="107" column="32" selection-start-line="107" selection-start-column="32" selection-end-line="107" selection-end-column="32" />
               <folding>
                 <element signature="e#2609#2610#0" expanded="true" />
                 <element signature="e#2645#2646#0" expanded="true" />
@@ -39,20 +39,16 @@
                 <element signature="e#2898#2899#0" expanded="true" />
                 <element signature="e#3187#3188#0" expanded="true" />
                 <element signature="e#3212#3213#0" expanded="true" />
-                <element signature="e#3833#3834#0" expanded="true" />
-                <element signature="e#3863#3864#0" expanded="true" />
-                <element signature="e#3849#3850#0" expanded="true" />
-                <element signature="e#3909#3910#0" expanded="true" />
-                <element signature="e#4525#4526#0" expanded="true" />
-                <element signature="e#4568#4569#0" expanded="true" />
-                <element signature="e#4799#4800#0" expanded="true" />
-                <element signature="e#4842#4843#0" expanded="true" />
-                <element signature="e#5273#5274#0" expanded="true" />
-                <element signature="e#5314#5315#0" expanded="true" />
-                <element signature="e#8398#8399#0" expanded="true" />
-                <element signature="e#8444#8445#0" expanded="true" />
-                <element signature="e#8871#8872#0" expanded="true" />
-                <element signature="e#8917#8918#0" expanded="true" />
+                <element signature="e#3913#3914#0" expanded="true" />
+                <element signature="e#3973#3974#0" expanded="true" />
+                <element signature="e#4802#4803#0" expanded="true" />
+                <element signature="e#4845#4846#0" expanded="true" />
+                <element signature="e#5076#5077#0" expanded="true" />
+                <element signature="e#5119#5120#0" expanded="true" />
+                <element signature="e#9598#9599#0" expanded="true" />
+                <element signature="e#9644#9645#0" expanded="true" />
+                <element signature="e#10071#10072#0" expanded="true" />
+                <element signature="e#10117#10118#0" expanded="true" />
                 <element signature="e#10125#10126#0" expanded="true" />
                 <element signature="e#10167#10168#0" expanded="true" />
                 <element signature="e#10258#10259#0" expanded="true" />
@@ -67,17 +63,8 @@
       <file leaf-file-name="TestGraphBuilding.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/TestGraphBuilding.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-59">
-              <caret line="76" column="16" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GraphDBLauncher.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/GraphDBLauncher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="9" column="118" lean-forward="true" selection-start-line="9" selection-start-column="118" selection-end-line="9" selection-end-column="118" />
+            <state relative-caret-position="346">
+              <caret line="123" column="5" lean-forward="true" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -106,6 +93,10 @@
       <find>System</find>
       <find>addEd</find>
       <find>getAllEdges</find>
+      <find>adjace</find>
+      <find>graph</find>
+      <find>addEdge</find>
+      <find>allEdge</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -353,34 +344,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestGraphBuilding - 2018.08.01 at 19h 19m 04s.xml">
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 22h 12m 30s.xml">
       <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGraphBuilding - 2018.08.01 at 19h 19m 31s.xml">
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 22h 13m 34s.xml">
       <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGraphBuilding - 2018.08.01 at 19h 22m 39s.xml">
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 22h 14m 52s.xml">
       <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGraphBuilding - 2018.08.01 at 19h 23m 17s.xml">
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 22h 16m 13s.xml">
       <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGraphBuilding - 2018.08.01 at 19h 33m 13s.xml">
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 22h 18m 30s.xml">
       <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGraphBuilding - 2018.08.01 at 19h 33m 52s.xml">
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 22h 29m 24s.xml">
       <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGraphBuilding - 2018.08.01 at 19h 34m 29s.xml">
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 22h 36m 44s.xml">
       <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGraphBuilding - 2018.08.01 at 19h 35m 00s.xml">
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 22h 38m 05s.xml">
       <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGraphBuilding - 2018.08.01 at 19h 38m 11s.xml">
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 22h 44m 47s.xml">
       <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestGraphBuilding - 2018.08.01 at 19h 39m 02s.xml">
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 22h 47m 35s.xml">
       <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -426,18 +417,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/GraphDB.java</url>
-          <line>162</line>
+          <line>171</line>
           <properties />
           <option name="timeStamp" value="38" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/GraphDB.java</url>
-          <line>118</line>
-          <properties />
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="41" />
+      <option name="time" value="47" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -623,13 +608,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GraphDBLauncher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="118" lean-forward="true" selection-start-line="9" selection-start-column="118" selection-end-line="9" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/example/CSCourseDB.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-961">
@@ -651,10 +629,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GraphDBLauncher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="118" lean-forward="true" selection-start-line="9" selection-start-column="118" selection-end-line="9" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/TestGraphBuilding.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="123" column="5" lean-forward="true" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GraphDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-150">
-          <caret line="99" column="16" lean-forward="true" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="16" />
+        <state relative-caret-position="240">
+          <caret line="107" column="32" selection-start-line="107" selection-start-column="32" selection-end-line="107" selection-end-column="32" />
           <folding>
             <element signature="e#2609#2610#0" expanded="true" />
             <element signature="e#2645#2646#0" expanded="true" />
@@ -662,20 +654,16 @@
             <element signature="e#2898#2899#0" expanded="true" />
             <element signature="e#3187#3188#0" expanded="true" />
             <element signature="e#3212#3213#0" expanded="true" />
-            <element signature="e#3833#3834#0" expanded="true" />
-            <element signature="e#3863#3864#0" expanded="true" />
-            <element signature="e#3849#3850#0" expanded="true" />
-            <element signature="e#3909#3910#0" expanded="true" />
-            <element signature="e#4525#4526#0" expanded="true" />
-            <element signature="e#4568#4569#0" expanded="true" />
-            <element signature="e#4799#4800#0" expanded="true" />
-            <element signature="e#4842#4843#0" expanded="true" />
-            <element signature="e#5273#5274#0" expanded="true" />
-            <element signature="e#5314#5315#0" expanded="true" />
-            <element signature="e#8398#8399#0" expanded="true" />
-            <element signature="e#8444#8445#0" expanded="true" />
-            <element signature="e#8871#8872#0" expanded="true" />
-            <element signature="e#8917#8918#0" expanded="true" />
+            <element signature="e#3913#3914#0" expanded="true" />
+            <element signature="e#3973#3974#0" expanded="true" />
+            <element signature="e#4802#4803#0" expanded="true" />
+            <element signature="e#4845#4846#0" expanded="true" />
+            <element signature="e#5076#5077#0" expanded="true" />
+            <element signature="e#5119#5120#0" expanded="true" />
+            <element signature="e#9598#9599#0" expanded="true" />
+            <element signature="e#9644#9645#0" expanded="true" />
+            <element signature="e#10071#10072#0" expanded="true" />
+            <element signature="e#10117#10118#0" expanded="true" />
             <element signature="e#10125#10126#0" expanded="true" />
             <element signature="e#10167#10168#0" expanded="true" />
             <element signature="e#10258#10259#0" expanded="true" />
@@ -686,17 +674,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/TestGraphBuilding.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-59">
-          <caret line="76" column="16" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GraphBuildingHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="101" column="12" lean-forward="true" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="12" />
+        <state relative-caret-position="250">
+          <caret line="174" column="51" selection-start-line="174" selection-start-column="51" selection-end-line="174" selection-end-column="51" />
           <folding>
             <element signature="docComment;method#GraphBuildingHandler#0;class#GraphBuildingHandler#0" />
           </folding>

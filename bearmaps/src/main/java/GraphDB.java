@@ -28,7 +28,9 @@ public class GraphDB {
     private HashMap<Long, Edge> edges = new HashMap<>();
 
     /* allEdges contains all edges in graph (might not implement*/
-    private TreeSet<Edge> allEdges = new TreeSet<>();
+    private HashSet<Edge> allEdges = new HashSet<>();
+
+    private int edgecounter;
 
 
     /**
@@ -90,21 +92,25 @@ public class GraphDB {
     }
 
     public void addEdge (long vertID1, long vertID2, double weight) {
-        addVertHelper(neighbors.get(vertID1)); // add vertices if they don't already exist
-        addVertHelper(neighbors.get(vertID2)); //
+        /*addVertHelper(neighbors.get(vertID1)); // add vertices if they don't already exist
+        addVertHelper(neighbors.get(vertID2)); *///
         Edge e1 = new Edge(vertID1, vertID2, weight);
         Edge e2 = new Edge(vertID2, vertID1, weight);
-        edges.put(vertID1,e1);
-        edges.put(vertID2,e2);
-        allEdges.add(e1);
-        allEdges.add(e2);
-        neighbors.get(vertID1).vertNeighbors.add(vertID2);
-        neighbors.get(vertID2).vertNeighbors.add(vertID1);
+        if (!edges.containsKey(vertID1) || !edges.containsKey(vertID2)) {
+            edgecounter++;
+            //System.out.println("Added New Edge.  This is edge number " + edgecounter);
+            edges.put(vertID1,e1);
+            edges.put(vertID2,e2);
+            allEdges.add(e1);
+            //System.out.println("This is the number of edges in allEdges ->" + allEdges.size());
+            //System.out.println("This is the number of edges in edges -> "+ edges.size());
+            //System.out.println();
+            neighbors.get(vertID1).vertNeighbors.add(vertID2);
+            neighbors.get(vertID2).vertNeighbors.add(vertID1);
+
+        }
     }
 
-    public TreeSet<Edge> getAllEdges() {
-        return allEdges;
-    }
     public TreeSet<Long> getAllVert() {
         return new TreeSet<Long>(neighbors.keySet());
     }
@@ -149,6 +155,9 @@ public class GraphDB {
      * @return An iterable of all vertex IDs in the graph.
      */
     Iterable<Long> vertices() {
+        System.out.println("This is entry set size " +neighbors.entrySet().size());
+        System.out.println("This is key set size" + neighbors.keySet().size());
+        System.out.println("This is value set size " + neighbors.values().size());
         return neighbors.keySet();
     }
 

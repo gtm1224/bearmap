@@ -96,6 +96,7 @@ public class GraphBuildingHandler extends DefaultHandler {
         } else if (qName.equals("way")) {
             /* Encountering a new <way...> tag. */
             activeState = "way";
+
             // System.out.println("Beginning a way...");
         } else if (activeState.equals("way") && qName.equals("nd")) {
             /* While looking at a way, found a <nd...> tag. */
@@ -160,16 +161,18 @@ public class GraphBuildingHandler extends DefaultHandler {
                 for (int i = 0; i < prevNodesWithinWay.size()-1; i++) {
                     long vertID1 = prevNodesWithinWay.get(i);
                     long vertID2 = prevNodesWithinWay.get(i+1);
-                    GraphDB.Edge e1 = new GraphDB.Edge(vertID1,vertID2, g.distance(vertID1,vertID2));
+                    double dist = g.distance(vertID1,vertID2);
+                    GraphDB.Edge e1 = new GraphDB.Edge(vertID1,vertID2, dist);
                     g.addEdgeHelper(e1);
                 }
+                validWay = false;
+                prevNodesWithinWay = new ArrayList<>();
                 /*long secondToLast = prevNodesWithinWay.get(prevNodesWithinWay.size()-2);
                 long Last = prevNodesWithinWay.get(prevNodesWithinWay.size()-1);
                 g.addEdge(secondToLast,Last,g.distance(secondToLast,Last));*/
-                prevNodesWithinWay = new ArrayList<>();
-                validWay = false;
 
             }
+            prevNodesWithinWay = new ArrayList<>();
             // System.out.println("Finishing a way...");
         }
         prevNodes = new ArrayList<>();
