@@ -141,6 +141,20 @@ public class GraphDB {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c;
     }
+    public double distance(double lon1, double lon2, double lat1, double lat2){
+        double phi1 = Math.toRadians(lat1);
+        double phi2 = Math.toRadians(lat2);
+        double dphi = Math.toRadians(lat2 - lat1);
+        double dlambda = Math.toRadians(lon2 - lon1);
+
+        double a = Math.sin(dphi / 2.0) * Math.sin(dphi / 2.0);
+        a += Math.cos(phi1) * Math.cos(phi2) * Math.sin(dlambda / 2.0) * Math.sin(dlambda / 2.0);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+    }
+    public double distance(double lon1, double lat1, long nodeid){
+        return distance(lon1,lon(nodeid),lat1,lat(nodeid));
+    }
 
     /**
      * Returns the ID of the vertex closest to the given longitude and latitude.
@@ -150,8 +164,15 @@ public class GraphDB {
      * @return The ID for the vertex closest to the <code>lon</code> and <code>lat</code>.
      */
     public long closest(double lon, double lat) {
-
-        return 0;
+        double closest =1000000000;
+        long closestid=1000000000;
+        for(long id:IDtoNode.keySet()){
+            if(distance(lon,lat,id)<closest){
+                closest=distance(lon,lat,id);
+                closestid=id;
+            }
+        }
+        return closestid;
     }
 
     /**
