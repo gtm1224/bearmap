@@ -7,7 +7,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.HashSet;
+import java.util.TreeSet;
 
 /**
  * Graph for storing all of the intersection (vertex) and road (edge) information.
@@ -22,8 +25,22 @@ public class GraphDB {
     /**
      * This constructor creates and starts an XML parser, cleans the nodes, and prepares the
      * data structures for processing. Modify this constructor to initialize your data structures.
+     *
      * @param dbPath Path to the XML file to be parsed.
      */
+
+    private HashMap<Long, Node> IDtoNode= new HashMap();
+    /* edges maps a Node to a hashset(neightbor) of its edges */
+    private HashMap<Long,HashSet<Edge>> edges = new HashMap<>();
+    private HashMap<Long, HashSet<Long>> neighbors = new HashMap<>();
+
+    /* allEdges contains all edges in graph (might not implement*/
+    private TreeSet<Edge> allEdges = new TreeSet<>();
+
+    public HashMap<Long, Node> getIDtoNode() {
+        return IDtoNode;
+    }
+
     public GraphDB(String dbPath) {
         File inputFile = new File(dbPath);
         try (FileInputStream inputStream = new FileInputStream(inputFile)) {
@@ -38,6 +55,7 @@ public class GraphDB {
 
     /**
      * Helper to process strings into their "cleaned" form, ignoring punctuation and capitalization.
+     *
      * @param s Input string.
      * @return Cleaned string.
      */
@@ -51,52 +69,61 @@ public class GraphDB {
      * we can reasonably assume this since typically roads are connected.
      */
     private void clean() {
-        // TODO
+      for(long nodeid: neighbors.keySet()){
+          if(neighbors.get(nodeid).isEmpty()){
+              neighbors.remove(nodeid);
+              edges.remove(nodeid);
+          }
+      }
     }
 
     /**
      * Returns the longitude of vertex <code>v</code>.
+     *
      * @param v The ID of a vertex in the graph.
      * @return The longitude of that vertex, or 0.0 if the vertex is not in the graph.
      */
     double lon(long v) {
-        // TODO
-        return 0;
+        return IDtoNode.get(v).getLon();
     }
 
     /**
      * Returns the latitude of vertex <code>v</code>.
+     *
      * @param v The ID of a vertex in the graph.
      * @return The latitude of that vertex, or 0.0 if the vertex is not in the graph.
      */
     double lat(long v) {
-        // TODO
-        return 0;
+        return IDtoNode.get(v).getLat();
     }
 
     /**
      * Returns an iterable of all vertex IDs in the graph.
+     *
      * @return An iterable of all vertex IDs in the graph.
      */
     Iterable<Long> vertices() {
-        // TODO
-        return Collections.emptySet();
+        return IDtoNode.keySet();
     }
 
     /**
      * Returns an iterable over the IDs of all vertices adjacent to <code>v</code>.
+     *
      * @param v The ID for any vertex in the graph.
      * @return An iterable over the IDs of all vertices adjacent to <code>v</code>, or an empty
      * iterable if the vertex is not in the graph.
      */
     Iterable<Long> adjacent(long v) {
-        // TODO
-        return Collections.emptySet();
+        if(IDtoNode.containsKey(v)) {
+            return new HashSet<>(neighbors.get(v));
+        }
+        return new HashSet<>();
     }
 
     /**
      * Returns the great-circle distance between two vertices, v and w, in miles.
      * Assumes the lon/lat methods are implemented properly.
+     *
      * @param v The ID for the first vertex.
      * @param w The ID for the second vertex.
      * @return The great-circle distance between vertices and w.
@@ -116,18 +143,20 @@ public class GraphDB {
 
     /**
      * Returns the ID of the vertex closest to the given longitude and latitude.
+     *
      * @param lon The given longitude.
      * @param lat The given latitude.
      * @return The ID for the vertex closest to the <code>lon</code> and <code>lat</code>.
      */
     public long closest(double lon, double lat) {
-        // TODO
+
         return 0;
     }
 
     /**
      * Return the Euclidean x-value for some point, p, in Berkeley. Found by computing the
      * Transverse Mercator projection centered at Berkeley.
+     *
      * @param lon The longitude for p.
      * @param lat The latitude for p.
      * @return The flattened, Euclidean x-value for p.
@@ -143,6 +172,7 @@ public class GraphDB {
     /**
      * Return the Euclidean y-value for some point, p, in Berkeley. Found by computing the
      * Transverse Mercator projection centered at Berkeley.
+     *
      * @param lon The longitude for p.
      * @param lat The latitude for p.
      * @return The flattened, Euclidean y-value for p.
@@ -157,6 +187,7 @@ public class GraphDB {
 
     /**
      * In linear time, collect all the names of OSM locations that prefix-match the query string.
+     *
      * @param prefix Prefix string to be searched for. Could be any case, with our without
      *               punctuation.
      * @return A <code>List</code> of the full names of locations whose cleaned name matches the
@@ -169,6 +200,7 @@ public class GraphDB {
     /**
      * Collect all locations that match a cleaned <code>locationName</code>, and return
      * information about each node that matches.
+     *
      * @param locationName A full name of a location searched for.
      * @return A <code>List</code> of <code>LocationParams</code> whose cleaned name matches the
      * cleaned <code>locationName</code>
@@ -182,6 +214,7 @@ public class GraphDB {
      * The initial bearing is the angle that, if followed in a straight line along a great-circle
      * arc from the starting point, would take you to the end point.
      * Assumes the lon/lat methods are implemented properly.
+     *
      * @param v The ID for the first vertex.
      * @param w The ID for the second vertex.
      * @return The bearing between <code>v</code> and <code>w</code> in degrees.
@@ -198,16 +231,122 @@ public class GraphDB {
         x -= Math.sin(phi1) * Math.cos(phi2) * Math.cos(lambda2 - lambda1);
         return Math.toDegrees(Math.atan2(y, x));
     }
+    public void addNode(double lat, double lon, long id){
+        if(!IDtoNode.containsKey(id)){
+            IDtoNode.put(id,new Node(lat,lon,id));
+            neighbors.put(id,new HashSet<>());
+            edges.put(id,new HashSet<>());
+        }
 
-    /** Radius of the Earth in miles. */
+    }
+
+    public void addEdge(long source, long dest){
+        Edge srcTodest= new Edge(source,dest,distance(source,dest));//source to dest edge
+        Edge destTosrc= new Edge(dest,source,distance(dest,source));//dest to source edge
+        neighbors.get(source).add(dest);
+        neighbors.get(dest).add(source);
+        edges.get(source).add(srcTodest);
+        edges.get(dest).add(destTosrc);
+    }
+
+
+    /**
+     * Radius of the Earth in miles.
+     */
     private static final int R = 3963;
-    /** Latitude centered on Berkeley. */
+    /**
+     * Latitude centered on Berkeley.
+     */
     private static final double ROOT_LAT = (MapServer.ROOT_ULLAT + MapServer.ROOT_LRLAT) / 2;
-    /** Longitude centered on Berkeley. */
+    /**
+     * Longitude centered on Berkeley.
+     */
     private static final double ROOT_LON = (MapServer.ROOT_ULLON + MapServer.ROOT_LRLON) / 2;
     /**
      * Scale factor at the natural origin, Berkeley. Prefer to use 1 instead of 0.9996 as in UTM.
+     *
      * @source https://gis.stackexchange.com/a/7298
      */
     private static final double K0 = 1.0;
+
+    public class Node {
+        private double lat;
+        private double lon;
+        private long id;
+        private String  Name;
+
+        public Node(double lat, double lon, long id) {
+            this.lat = lat;
+            this.lon = lon;
+            this.id = id;
+        }
+
+        public double getLat() {
+            return lat;
+        }
+
+        public double getLon() {
+            return lon;
+        }
+
+        public long getId() {
+            return id;
+        }
+
+
+        public String getName() {
+            return Name;
+        }
+
+    }
+    public class Edge implements Comparable<Edge> {
+
+        private long src;
+        private long dest;
+        private double weight;
+
+        /* Creates an Edge (SRC, DEST) with edge weight WEIGHT. */
+        Edge(long src, long dest, double weight) {
+            this.src = src;
+            this.dest = dest;
+            this.weight = weight;
+        }
+
+        /* Returns the edge's source node. */
+        public long getSource() {
+            return src;
+        }
+
+        /* Returns the edge's destination node. */
+        public long getDest() {
+            return dest;
+        }
+
+        /* Returns the weight of the edge. */
+        public double getWeight() {
+            return weight;
+        }
+
+        public int compareTo(Edge other) {
+            double cmp =  weight - other.weight;
+            return (int) cmp;
+        }
+
+        /* Returns true if two Edges have the same source, destination, and
+           weight. */
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            } else if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+
+            Edge e = (Edge) o;
+            return (src == e.src && dest == e.dest && weight == e.weight)
+                    || (src == e.dest && dest == e.src && weight == e.weight);
+        }
+
+
+    }
+
 }

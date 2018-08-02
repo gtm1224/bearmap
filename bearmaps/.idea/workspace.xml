@@ -15,64 +15,116 @@
       <file leaf-file-name="MapServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/MapServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="35" column="62" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="62" />
+            <state relative-caret-position="17">
+              <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Rasterer.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
+      <file leaf-file-name="GraphDB.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/GraphDB.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="20" column="32" lean-forward="true" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+            <state relative-caret-position="376">
+              <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1523#1524#0" expanded="true" />
+                <element signature="e#1554#1555#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RasterResultParams.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/RasterResultParams.java">
+      <file leaf-file-name="GraphBuildingHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/GraphBuildingHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+            <state relative-caret-position="1802">
+              <caret line="162" column="13" lean-forward="true" selection-start-line="162" selection-start-column="13" selection-end-line="162" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestRasterer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/TestRasterer.java">
+      <file leaf-file-name="TestGraphBuildingTiny.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/TestGraphBuildingTiny.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="306">
+              <caret line="78" selection-start-line="78" selection-end-line="78" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RasterRequestParams.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/RasterRequestParams.java">
+      <file leaf-file-name="Graph.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../lab26/Graph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="25" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="25" />
+            <state relative-caret-position="510">
+              <caret line="52" column="16" selection-start-line="52" selection-start-column="11" selection-end-line="52" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="raster_results.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/raster_results.txt">
+      <file leaf-file-name="Edge.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../lab26/Edge.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestGraphBuilding.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/TestGraphBuilding.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="697">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CSCourseDB.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/example/CSCourseDB.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GraphDBLauncher.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/GraphDBLauncher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="berkeley-2018.osm.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../library-su18/bearmaps/berkeley-2018.osm.xml">
+          <provider selected="true" editor-type-id="LargeFileEditor" />
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>adjacent</find>
+      <find>addEdge</find>
+      <find>distance</find>
+      <find>clean</find>
+      <find>closest</find>
+    </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/RasterResultParams.java" />
         <option value="$PROJECT_DIR$/src/main/java/Rasterer.java" />
+        <option value="$PROJECT_DIR$/../lab26/Edge.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GraphDB.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GraphBuildingHandler.java" />
       </list>
     </option>
   </component>
@@ -94,8 +146,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -125,6 +175,27 @@
               <item name="bearmaps" type="b2602c69:ProjectViewProjectNode" />
               <item name="bearmaps" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bearmaps" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bearmaps" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="page" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bearmaps" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bearmaps" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="page" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bearmaps" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bearmaps" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -134,14 +205,22 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="bearmaps" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bearmaps" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../library-su18/bearmaps/berkeley-2018.osm.xml" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -158,7 +237,12 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestRasterer">
+  <component name="RunManager" selected="JUnit.TestGraphBuildingTiny">
+    <configuration name="GraphDBLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GraphDBLauncher" />
+      <module name="bearmaps" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
     <configuration name="MapServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MapServer" />
       <module name="bearmaps" />
@@ -166,6 +250,40 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="TestGraphBuilding" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bearmaps" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestGraphBuilding" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="TestGraphBuildingTiny" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bearmaps" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestGraphBuildingTiny" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
     </configuration>
     <configuration name="TestRasterer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bearmaps" />
@@ -225,11 +343,17 @@
     <list>
       <item itemvalue="Application.MapServer" />
       <item itemvalue="JUnit.TestRasterer" />
+      <item itemvalue="Application.GraphDBLauncher" />
+      <item itemvalue="JUnit.TestGraphBuilding" />
+      <item itemvalue="JUnit.TestGraphBuildingTiny" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestRasterer" />
+        <item itemvalue="JUnit.TestGraphBuildingTiny" />
+        <item itemvalue="JUnit.TestGraphBuilding" />
+        <item itemvalue="Application.GraphDBLauncher" />
         <item itemvalue="Application.MapServer" />
+        <item itemvalue="JUnit.TestRasterer" />
       </list>
     </recent_temporary>
   </component>
@@ -247,35 +371,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestRasterer - 2018.07.30 at 22h 49m 03s.xml">
+    <history-entry file="TestRasterer - 2018.08.01 at 15h 05m 08s.xml">
       <configuration name="TestRasterer" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestRasterer - 2018.07.30 at 22h 50m 53s.xml">
-      <configuration name="TestRasterer" configurationId="JUnit" />
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 16h 25m 22s.xml">
+      <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestRasterer - 2018.07.30 at 22h 51m 33s.xml">
-      <configuration name="TestRasterer" configurationId="JUnit" />
+    <history-entry file="TestGraphBuilding - 2018.08.01 at 16h 27m 26s.xml">
+      <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestRasterer - 2018.07.30 at 22h 52m 35s.xml">
-      <configuration name="TestRasterer" configurationId="JUnit" />
+    <history-entry file="TestGraphBuildingTiny - 2018.08.01 at 22h 34m 22s.xml">
+      <configuration name="TestGraphBuildingTiny" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestRasterer - 2018.07.30 at 22h 57m 46s.xml">
-      <configuration name="TestRasterer" configurationId="JUnit" />
+    <history-entry file="TestGraphBuildingTiny - 2018.08.02 at 00h 02m 40s.xml">
+      <configuration name="TestGraphBuildingTiny" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestRasterer - 2018.07.30 at 22h 58m 37s.xml">
-      <configuration name="TestRasterer" configurationId="JUnit" />
+    <history-entry file="TestGraphBuildingTiny - 2018.08.02 at 00h 14m 14s.xml">
+      <configuration name="TestGraphBuildingTiny" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestRasterer - 2018.07.30 at 23h 11m 01s.xml">
-      <configuration name="TestRasterer" configurationId="JUnit" />
+    <history-entry file="TestGraphBuildingTiny - 2018.08.02 at 00h 17m 07s.xml">
+      <configuration name="TestGraphBuildingTiny" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestRasterer - 2018.07.30 at 23h 14m 22s.xml">
-      <configuration name="TestRasterer" configurationId="JUnit" />
+    <history-entry file="TestGraphBuildingTiny - 2018.08.02 at 00h 17m 16s.xml">
+      <configuration name="TestGraphBuildingTiny" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestRasterer - 2018.07.30 at 23h 17m 47s.xml">
-      <configuration name="TestRasterer" configurationId="JUnit" />
+    <history-entry file="TestGraphBuilding - 2018.08.02 at 00h 25m 20s.xml">
+      <configuration name="TestGraphBuilding" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestRasterer - 2018.07.30 at 23h 20m 02s.xml">
-      <configuration name="TestRasterer" configurationId="JUnit" />
+    <history-entry file="TestGraphBuildingTiny - 2018.08.02 at 10h 28m 54s.xml">
+      <configuration name="TestGraphBuildingTiny" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -284,25 +408,25 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32905984" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37891737" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22934473" />
       <window_info anchor="bottom" id="Style Checker" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2671141" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29127517" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3988604" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -314,7 +438,89 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="72" column="37" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/RasterResultParams.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/TestRasterer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/RasterRequestParams.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/raster_results.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MapServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="35" column="62" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/RasterResultParams.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/TestRasterer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/RasterRequestParams.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/raster_results.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="72" column="37" lean-forward="true" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MapServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -464,31 +670,116 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/TestRasterer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/RasterResultParams.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
+        <state relative-caret-position="-2488">
           <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/TestRasterer.java">
+    <entry file="file://$PROJECT_DIR$/berkeley-cs.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="-1224" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../library-su18/bearmaps/berkeley-2018.osm.xml">
+      <provider selected="true" editor-type-id="LargeFileEditor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/example/CSCourseDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/path_params.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test1234.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="72" column="37" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GraphDBLauncher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../lab26/Graph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="52" column="16" selection-start-line="52" selection-start-column="11" selection-end-line="52" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/example/CSCourseDBHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../lab26/Edge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/TestGraphBuilding.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/TestGraphBuildingTiny.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MapServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="35" column="62" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="62" />
+        <state relative-caret-position="17">
+          <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/GraphBuildingHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="20" column="32" lean-forward="true" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+        <state relative-caret-position="1802">
+          <caret line="162" column="13" lean-forward="true" selection-start-line="162" selection-start-column="13" selection-end-line="162" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GraphDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="154" lean-forward="true" selection-start-line="154" selection-end-line="154" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1523#1524#0" expanded="true" />
+            <element signature="e#1554#1555#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
