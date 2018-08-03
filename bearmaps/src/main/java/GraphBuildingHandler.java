@@ -52,6 +52,7 @@ public class GraphBuildingHandler extends DefaultHandler {
     private double nodeLat;
     private long nodeID;
     private ArrayList<Long> way;
+    private String wayname;
     private boolean validWay = false; // Default valid way as false to ensure no improper connections are made
 
     /**
@@ -120,12 +121,18 @@ public class GraphBuildingHandler extends DefaultHandler {
 
             } else if (k.equals("name")) {
                  //System.out.println("Way Name: " + v);
+                wayname=v;
+
             }
             // System.out.println("Tag with k=" + k + ", v=" + v + ".");
         } else if (activeState.equals("node") && qName.equals("tag") && attributes.getValue("k")
                 .equals("name")) {
             /* While looking at a node, found a <tag...> with k="name". */
-
+            //nodeID = Long.parseLong(attributes.getValue("id"));
+            //nodeLon = Double.parseDouble(attributes.getValue("lon"));
+            //nodeLat = Double.parseDouble(attributes.getValue("lat"));
+            //g.addNode(nodeLat,nodeLon,nodeID);
+            //g.getIDtoNode().get(nodeID).setName(attributes.getValue("v"));
             /* TODO: Create a location.
              * Hint: Since we found this <tag...> INSIDE a node, we should probably remember which
              * node this tag belongs to. Remember XML is parsed top-to-bottom, so probably it's the
@@ -156,6 +163,7 @@ public class GraphBuildingHandler extends DefaultHandler {
             if(flag){
                 for (int i = 0; i <way.size()-1 ; i++) {
                     g.addEdge(way.get(i),way.get(i+1));
+                    g.getIDtoNode().get(way.get(i)).setName(wayname);
                 }
             }
             flag=false;

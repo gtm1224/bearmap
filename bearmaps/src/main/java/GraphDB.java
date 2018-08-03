@@ -37,6 +37,14 @@ public class GraphDB {
         return IDtoNode;
     }
 
+    public HashMap<Long, HashSet<Edge>> getEdges() {
+        return edges;
+    }
+
+    public HashMap<Long, HashSet<Long>> getNeighbors() {
+        return neighbors;
+    }
+
     public GraphDB(String dbPath) {
         File inputFile = new File(dbPath);
         try (FileInputStream inputStream = new FileInputStream(inputFile)) {
@@ -301,6 +309,16 @@ public class GraphDB {
             this.lat = lat;
             this.lon = lon;
             this.id = id;
+        }
+        public Node(double lat, double lon, long id,String name) {
+            this.lat = lat;
+            this.lon = lon;
+            this.id = id;
+            this.Name=name;
+        }
+
+        public void setName(String name) {
+            Name = name;
         }
 
         public double getLat() {
