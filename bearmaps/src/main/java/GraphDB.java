@@ -6,7 +6,15 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.TreeSet;
+import java.util.List;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * Graph for storing all of the intersection (vertex) and road (edge) information.
@@ -22,7 +30,7 @@ public class GraphDB {
     /* Implement constructors for previously designed Graph class. */
 
     /* neighbors maps vertices iD to a map of neighboring vertices */
-    private HashMap<Long, Vertex> neighbors  = new HashMap<>();
+    private HashMap<Long, Vertex> neighbors = new HashMap<>();
 
     /* edges maps vertices id to a map of its edges */
     private HashMap<Long, Edge> edges = new HashMap<>();
@@ -30,12 +38,15 @@ public class GraphDB {
     /* allEdges contains all edges in graph (might not implement*/
     private HashSet<Edge> allEdges = new HashSet<>();
 
+    private KDT kdTree = new KDT(null);
+
     private int edgecounter;
 
 
     /**
      * This constructor creates and starts an XML parser, cleans the nodes, and prepares the
      * data structures for processing. Modify this constructor to initialize your data structures.
+     *
      * @param dbPath Path to the XML file to be parsed.
      */
 
@@ -49,10 +60,48 @@ public class GraphDB {
             e.printStackTrace();
         }
         clean();
+
+
+        ArrayList<Vertex> listVert = arrayListVertices();
+        Collections.sort(listVert, new Vertex.SortByEuclid());
+        //sort by uclidean distance from root lot and lan
+        kdtHelper(listVert, kdTree, 0);
+    }
+
+    public KdTreeNode kdtHelper(ArrayList<Vertex> listVert, KDT currKDTree, int depth) {
+        int axis = depth % 2; //specify how to sort
+        // if axis == 0 sort on x, if axis == 1 sort on y
+        if (axis == 0) {
+            Collections.sort(listVert, new Vertex.SortByX());
+        } else if (axis == 1) {
+            Collections.sort(listVert, new Vertex.SortByY());
+        }
+        if (listVert.size() == 1) {
+            currKDTree.root = new KdTreeNode(listVert.get(0));
+            return currKDTree.root;
+        } else if (listVert.size() == 2) {
+            currKDTree.root = new KdTreeNode(listVert.get(1));
+            currKDTree.root.left = new KdTreeNode(listVert.get(0));
+            return currKDTree.root;
+        } else if (listVert.size() == 3) {
+            currKDTree.root = new KdTreeNode(listVert.get(1));
+            currKDTree.root.left = new KdTreeNode(listVert.get(0));
+            currKDTree.root.right = new KdTreeNode(listVert.get(2));
+            return currKDTree.root;
+        }
+        currKDTree.root = new KdTreeNode(listVert.get((listVert.size() / 2)));
+        ArrayList<Vertex> first = new ArrayList<>(listVert.subList(0, listVert.size() / 2 - 1));
+        ArrayList<Vertex> second = new ArrayList<>(listVert.subList((listVert.size() / 2 + 1),
+                listVert.size()));
+        currKDTree.root.left = kdtHelper(first, currKDTree, depth + 1);
+        currKDTree.root.right = kdtHelper(second, currKDTree, depth + 1);
+        return currKDTree.root;
+
     }
 
     /**
      * Helper to process strings into their "cleaned" form, ignoring punctuation and capitalization.
+     *
      * @param s Input string.
      * @return Cleaned string.
      */
@@ -62,18 +111,25 @@ public class GraphDB {
 
     /**
      * Add vertex (node) to graph if it doesn't already exist in graph.  Adopted from
-     * lab26 methods */
-    public void addVert (long vertID, double lat, double lon) {
+     * lab26 methods
+     */
+    public void addVert(long vertID, double lat, double lon) {
         if (neighbors.get(vertID) == null) {
             neighbors.put(vertID, new Vertex(lon, lat, vertID));
         }
     }
-    /** Return vertex given vertID*/
+
+    /**
+     * Return vertex given vertID
+     */
     public Vertex getVert(long vertID) {
         return neighbors.get(vertID);
     }
-    /** removeVert removes from neighbors HashMap and allVertices HashMap*/
-    public void removeVert (long vertID) {
+
+    /**
+     * removeVert removes from neighbors HashMap and allVertices HashMap
+     */
+    public void removeVert(long vertID) {
         if (neighbors.get(vertID) == null) {
             System.out.println("Vertex does not exist in graph");
         } else {
@@ -88,27 +144,19 @@ public class GraphDB {
     }
 
     public void addEdgeHelper(Edge e) {
-        addEdge(e.src,e.dest,e.weight);
+        addEdge(e.src, e.dest, e.weight);
     }
 
-    public void addEdge (long vertID1, long vertID2, double weight) {
+    public void addEdge(long vertID1, long vertID2, double weight) {
         /*addVertHelper(neighbors.get(vertID1)); // add vertices if they don't already exist
         addVertHelper(neighbors.get(vertID2)); *///
         Edge e1 = new Edge(vertID1, vertID2, weight);
         Edge e2 = new Edge(vertID2, vertID1, weight);
-        if (!edges.containsKey(vertID1) || !edges.containsKey(vertID2)) {
-            edgecounter++;
-            //System.out.println("Added New Edge.  This is edge number " + edgecounter);
-            edges.put(vertID1,e1);
-            edges.put(vertID2,e2);
-            allEdges.add(e1);
-            //System.out.println("This is the number of edges in allEdges ->" + allEdges.size());
-            //System.out.println("This is the number of edges in edges -> "+ edges.size());
-            //System.out.println();
-            neighbors.get(vertID1).vertNeighbors.add(vertID2);
-            neighbors.get(vertID2).vertNeighbors.add(vertID1);
-
-        }
+        edges.put(vertID1, e1);
+        edges.put(vertID2, e2);
+        allEdges.add(e1);
+        neighbors.get(vertID1).vertNeighbors.add(vertID2);
+        neighbors.get(vertID2).vertNeighbors.add(vertID1);
     }
 
     public TreeSet<Long> getAllVert() {
@@ -122,18 +170,19 @@ public class GraphDB {
      */
     private void clean() {
         ArrayList<Long> removeIDs = new ArrayList<>();
-        for (Long vertices: vertices()) {
+        for (Long vertices : vertices()) {
             if (neighbors.get(vertices).vertNeighbors.isEmpty()) {
                 removeIDs.add(vertices);
             }
         }
-        for (Long vertIDRemove: removeIDs) {
+        for (Long vertIDRemove : removeIDs) {
             removeVert(vertIDRemove);
         }
     }
 
     /**
      * Returns the longitude of vertex <code>v</code>.
+     *
      * @param v The ID of a vertex in the graph.
      * @return The longitude of that vertex, or 0.0 if the vertex is not in the graph.
      */
@@ -143,6 +192,7 @@ public class GraphDB {
 
     /**
      * Returns the latitude of vertex <code>v</code>.
+     *
      * @param v The ID of a vertex in the graph.
      * @return The latitude of that vertex, or 0.0 if the vertex is not in the graph.
      */
@@ -152,17 +202,25 @@ public class GraphDB {
 
     /**
      * Returns an iterable of all vertex IDs in the graph.
+     *
      * @return An iterable of all vertex IDs in the graph.
      */
     Iterable<Long> vertices() {
-        System.out.println("This is entry set size " +neighbors.entrySet().size());
-        System.out.println("This is key set size" + neighbors.keySet().size());
-        System.out.println("This is value set size " + neighbors.values().size());
         return neighbors.keySet();
+    }
+
+    ArrayList<Vertex> arrayListVertices() {
+        ArrayList<Vertex> returnList = new ArrayList<>();
+        Iterator<Long> iterator = vertices().iterator();
+        while (iterator.hasNext()) {
+            returnList.add(getVert(iterator.next()));
+        }
+        return returnList;
     }
 
     /**
      * Returns an iterable over the IDs of all vertices adjacent to <code>v</code>.
+     *
      * @param v The ID for any vertex in the graph.
      * @return An iterable over the IDs of all vertices adjacent to <code>v</code>, or an empty
      * iterable if the vertex is not in the graph.
@@ -178,6 +236,7 @@ public class GraphDB {
     /**
      * Returns the great-circle distance between two vertices, v and w, in miles.
      * Assumes the lon/lat methods are implemented properly.
+     *
      * @param v The ID for the first vertex.
      * @param w The ID for the second vertex.
      * @return The great-circle distance between vertices and w.
@@ -197,33 +256,79 @@ public class GraphDB {
 
     /**
      * Returns the ID of the vertex closest to the given longitude and latitude.
+     *
      * @param lon The given longitude.
      * @param lat The given latitude.
      * @return The ID for the vertex closest to the <code>lon</code> and <code>lat</code>.
      */
     public long closest(double lon, double lat) {
         long currMinID = getAllVert().first(); // Create a first vertex to compare against
-        Vertex tempVert = new Vertex(lon, lat, (long) Math.abs(lat+lon)); // Create a temporary vertex so we can use
+        Vertex tempVert = new Vertex(lon, lat, (long) Math.abs(lat + lon));
+        // Create a temporary vertex so we can use
         // the given distance method
         addVertHelper(tempVert); // add temporary vertex to graph
-        double currMinDistance = distance(currMinID,tempVert.vertID);
-        for (Long vertexID: vertices()) {
+        double currMinDistance = distance(currMinID, tempVert.vertID);
+        for (Long vertexID : vertices()) {
             if (vertexID == tempVert.vertID) {
                 continue; //ignore temporary vertex
             }
-            double cmp = distance(vertexID,tempVert.vertID);
+            double cmp = distance(vertexID, tempVert.vertID);
             if (cmp < currMinDistance) {
                 currMinDistance = cmp;
                 currMinID = vertexID;
             }
         }
-        removeVert(tempVert.vertID); //remove temporary vertex
+        removeVert(tempVert.vertID);
         return currMinID;
+        //Perform nearest neighbor search for given point
+        /*int depth = 0;
+        Vertex vertDesired = new Vertex(lon,lat,-00);
+        kdTreeNode closestNode = closestHelper(depth, vertDesired,kdTree.root,kdTree.root);
+        return closestNode.vert.vertID;*/
+
+        /*Replace closes with call to k-d tree*/
+    }
+
+    public KdTreeNode closestHelper(int depth, Vertex vertGiven, KdTreeNode root, KdTreeNode best) {
+        int axis = depth % 2;
+        // if axis == 0 sort on x, if axis == 1 sort on y
+        double vertX = projectToX(vertGiven.lon, vertGiven.lat);
+        double vertY = projectToY(vertGiven.lon, vertGiven.lat);
+
+        if (root.left == null && root.right == null) {
+            //Reached root, save root as best
+            return root;
+        } else {
+            if (axis == 0) {
+                if (vertX > root.x) {
+                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, root.right, best);
+                } else if (vertX < root.x) {
+                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, root.left, best);
+                }
+            } else if (axis == 1) {
+                if (vertY > root.y) {
+                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, root.right, best);
+                } else if (vertY < root.y) {
+                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, root.left, best);
+                }
+            }
+
+        }
+
+        double dist1 = root.euclideanKD(vertX, vertY);
+        double dist2 = best.euclideanKD(vertX, vertY);
+        if (dist1 < dist2) {
+            return root;
+        } else {
+            return best;
+        }
+
     }
 
     /**
      * Return the Euclidean x-value for some point, p, in Berkeley. Found by computing the
      * Transverse Mercator projection centered at Berkeley.
+     *
      * @param lon The longitude for p.
      * @param lat The latitude for p.
      * @return The flattened, Euclidean x-value for p.
@@ -239,6 +344,7 @@ public class GraphDB {
     /**
      * Return the Euclidean y-value for some point, p, in Berkeley. Found by computing the
      * Transverse Mercator projection centered at Berkeley.
+     *
      * @param lon The longitude for p.
      * @param lat The latitude for p.
      * @return The flattened, Euclidean y-value for p.
@@ -253,6 +359,7 @@ public class GraphDB {
 
     /**
      * In linear time, collect all the names of OSM locations that prefix-match the query string.
+     *
      * @param prefix Prefix string to be searched for. Could be any case, with our without
      *               punctuation.
      * @return A <code>List</code> of the full names of locations whose cleaned name matches the
@@ -265,6 +372,7 @@ public class GraphDB {
     /**
      * Collect all locations that match a cleaned <code>locationName</code>, and return
      * information about each node that matches.
+     *
      * @param locationName A full name of a location searched for.
      * @return A <code>List</code> of <code>LocationParams</code> whose cleaned name matches the
      * cleaned <code>locationName</code>
@@ -278,6 +386,7 @@ public class GraphDB {
      * The initial bearing is the angle that, if followed in a straight line along a great-circle
      * arc from the starting point, would take you to the end point.
      * Assumes the lon/lat methods are implemented properly.
+     *
      * @param v The ID for the first vertex.
      * @param w The ID for the second vertex.
      * @return The bearing between <code>v</code> and <code>w</code> in degrees.
@@ -295,23 +404,36 @@ public class GraphDB {
         return Math.toDegrees(Math.atan2(y, x));
     }
 
-    /** Radius of the Earth in miles. */
+    /**
+     * Radius of the Earth in miles.
+     */
     private static final int R = 3963;
-    /** Latitude centered on Berkeley. */
+    /**
+     * Latitude centered on Berkeley.
+     */
     private static final double ROOT_LAT = (MapServer.ROOT_ULLAT + MapServer.ROOT_LRLAT) / 2;
-    /** Longitude centered on Berkeley. */
+    /**
+     * Longitude centered on Berkeley.
+     */
     private static final double ROOT_LON = (MapServer.ROOT_ULLON + MapServer.ROOT_LRLON) / 2;
     /**
      * Scale factor at the natural origin, Berkeley. Prefer to use 1 instead of 0.9996 as in UTM.
+     *
      * @source https://gis.stackexchange.com/a/7298
      */
     private static final double K0 = 1.0;
 
-    /** Add Sub-Classes to make storage and other processes easier.  Consider classes
-     *  encountered before.  An Edge and Node(Vertex Class) seem most helpful.  Use
-     *  Vertex sub-class, consider values needed
-     *  lon, lat, id.
-     *  Include Edge subclass to make the formation of edges easier*/
+    /**
+     * Add Sub-Classes to make storage and other processes easier.  Consider classes
+     * encountered before.  An Edge and Node(Vertex Class) seem most helpful.  Use
+     * Vertex sub-class, consider values needed
+     * lon, lat, id.
+     * Include Edge subclass to make the formation of edges easier
+     */
+
+    static Double euclidean(double x1, double x2, double y1, double y2) {
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    }
 
     static class Vertex { //note vertex is equivalent to node
         double lon;
@@ -324,15 +446,96 @@ public class GraphDB {
             this.lon = lon;
             this.lat = lat;
             this.vertID = vertID;
-            this.vertNeighbors= new HashSet<Long>();
+            this.vertNeighbors = new HashSet<Long>();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Vertex vertex = (Vertex) o;
+            return Double.compare(vertex.lon, lon) == 0
+                    && Double.compare(vertex.lat, lat) == 0
+                    && vertID == vertex.vertID
+                    && Objects.equals(vertName, vertex.vertName)
+                    && Objects.equals(vertNeighbors, vertex.vertNeighbors);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(lon, lat, vertID, vertName, vertNeighbors);
+        }
+
+        static class SortByEuclid implements Comparator<Vertex> {
+            public int compare(Vertex a, Vertex b) {
+                double vertAx = projectToX(a.lon, a.lat);
+                double vertAy = projectToY(a.lon, a.lat);
+                double vertBx = projectToX(b.lon, b.lat);
+                double vertBy = projectToY(b.lon, b.lat);
+                double rootX = projectToX(ROOT_LON, ROOT_LAT);
+                double rootY = projectToY(ROOT_LON, ROOT_LAT);
+                return euclidean(vertAx, rootX, vertAy, rootY).compareTo(
+                        euclidean(vertBx, rootX, vertBy, rootY));
+            }
+        }
+
+        static class SortByX implements Comparator<Vertex> {
+            public int compare(Vertex a, Vertex b) {
+                Double vertAx = projectToX(a.lon, a.lat);
+                Double vertBx = projectToX(b.lon, b.lat);
+                return vertAx.compareTo(vertBx);
+            }
+        }
+
+        static class SortByY implements Comparator<Vertex> {
+            public int compare(Vertex a, Vertex b) {
+                Double vertAy = projectToY(a.lon, a.lat);
+                Double vertBy = projectToY(b.lon, b.lat);
+                return vertAy.compareTo(vertBy);
+            }
+        }
+
+    }
+
+    static class KdTreeNode {
+
+        GraphDB.Vertex vert;
+        Double x;
+        Double y;
+        KdTreeNode left;
+        KdTreeNode right;
+
+        KdTreeNode(Vertex vert) {
+            this.vert = vert;
+            this.x = projectToX(vert.lon, vert.lat);
+            this.y = projectToY(vert.lon, vert.lat);
+        }
+
+        public double euclideanKD(double lon, double lat) {
+            double x2 = projectToX(lon, lat);
+            double y2 = projectToY(lon, lat);
+            return Math.sqrt(Math.pow(this.x - x2, 2) + Math.pow(this.y - y2, 2));
         }
     }
-    static class Edge implements Comparable<Edge>{
+
+    static class KDT {
+        KdTreeNode root;
+
+        KDT(KdTreeNode t) {
+            root = t;
+        }
+    }
+
+    static class Edge implements Comparable<Edge> {
         /* Note that all roads are considered two way.  We can therefore
-        * thinks of "roads" as undirected edges. Only need two vertices
-        * Designate vertOne and vertTwo
-        * Implement Comparable to allow for easier sorting later when
-        * finding shortest path*/
+         * thinks of "roads" as undirected edges. Only need two vertices
+         * Designate vertOne and vertTwo
+         * Implement Comparable to allow for easier sorting later when
+         * finding shortest path*/
 
         long src;
         long dest;
@@ -344,27 +547,8 @@ public class GraphDB {
             this.weight = weight;
         }
 
-        /* Adds an edge between two vertices */
-        public void addEdge(long src, long dest, double weight) {
-
-        }
-        /* Returns the edge's source node. */
-        public long getSource() {
-            return src;
-        }
-
-        /* Returns the edge's destination node. */
-        public long getDest() {
-            return dest;
-        }
-
-        /* Returns the weight of the edge. */
-        public double getWeight() {
-            return weight;
-        }
-
         public int compareTo(Edge other) {
-            double cmp =  weight - other.weight;
+            double cmp = weight - other.weight;
             return (int) Math.round(cmp);
         }
 
@@ -382,6 +566,11 @@ public class GraphDB {
                     || (src == e.dest && dest == e.src && weight == e.weight);
         }
 
+        @Override
+        public int hashCode() {
+
+            return Objects.hash(src, dest, weight);
+        }
         /* Returns the hashcode for this instance. */
 
     }

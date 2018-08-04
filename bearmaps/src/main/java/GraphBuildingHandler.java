@@ -3,27 +3,26 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
- *  Parses OSM XML files using an XML SAX parser. Used to construct the graph of roads for
- *  pathfinding, under some constraints.
- *  See OSM documentation on
- *  <a href="http://wiki.openstreetmap.org/wiki/Key:highway">the highway tag</a>,
- *  <a href="http://wiki.openstreetmap.org/wiki/Way">the way XML element</a>,
- *  <a href="http://wiki.openstreetmap.org/wiki/Node">the node XML element</a>,
- *  and the java
- *  <a href="https://docs.oracle.com/javase/tutorial/jaxp/sax/parsing.html">SAX parser tutorial</a>.
+ * Parses OSM XML files using an XML SAX parser. Used to construct the graph of roads for
+ * pathfinding, under some constraints.
+ * See OSM documentation on
+ * <a href="http://wiki.openstreetmap.org/wiki/Key:highway">the highway tag</a>,
+ * <a href="http://wiki.openstreetmap.org/wiki/Way">the way XML element</a>,
+ * <a href="http://wiki.openstreetmap.org/wiki/Node">the node XML element</a>,
+ * and the java
+ * <a href="https://docs.oracle.com/javase/tutorial/jaxp/sax/parsing.html">SAX parser tutorial</a>.
+ * <p>
+ * You may find the CSCourseGraphDB and CSCourseGraphDBHandler examples useful.
+ * <p>
+ * The idea here is that some external library is going to walk through the XML file, and your
+ * override method tells Java what to do every time it gets to the next element in the file. This
+ * is a very common but strange-when-you-first-see it pattern. It is similar to the Visitor pattern
+ * we discussed for graphs.
  *
- *  You may find the CSCourseGraphDB and CSCourseGraphDBHandler examples useful.
- *
- *  The idea here is that some external library is going to walk through the XML file, and your
- *  override method tells Java what to do every time it gets to the next element in the file. This
- *  is a very common but strange-when-you-first-see it pattern. It is similar to the Visitor pattern
- *  we discussed for graphs.
- *
- *  @author Alan Yao, Maurice Lee
+ * @author Alan Yao, Maurice Lee
  */
 public class GraphBuildingHandler extends DefaultHandler {
     /**
@@ -43,11 +42,14 @@ public class GraphBuildingHandler extends DefaultHandler {
     private double nodeLat;
     private long nodeID;
     private ArrayList<Long> prevNodes = new ArrayList<>();
-    private ArrayList<Long> prevNodesWithinWay = new ArrayList<>(); //make separate array list for when considering ways
-    private boolean validWay = false; // Default valid way as false to ensure no improper connections are made
+    private ArrayList<Long> prevNodesWithinWay = new ArrayList<>();
+    //make separate array list for when considering ways
+    private boolean validWay = false;
+    // Default valid way as false to ensure no improper connections are made
 
     /**
      * Create a new GraphBuildingHandler.
+     *
      * @param g The graph to populate with the XML data.
      */
     public GraphBuildingHandler(GraphDB g) {
@@ -57,23 +59,25 @@ public class GraphBuildingHandler extends DefaultHandler {
     /**
      * Called at the beginning of an element. Typically, you will want to handle each element in
      * here, and you may want to track the parent element.
-     * @param uri The Namespace URI, or the empty string if the element has no Namespace URI or if
-     *            Namespace processing is not being performed.
-     * @param localName The local name (without prefix), or the empty string if Namespace processing
-     *                  is not being performed.
-     * @param qName The qualified name (with prefix), or the empty string if qualified names are not
-     *              available. This tells us which element we're looking at.
+     *
+     * @param uri        The Namespace URI, or the empty string if the
+     *                   element has no Namespace URI or if
+     *                   Namespace processing is not being performed.
+     * @param localName  The local name (without prefix), or the empty string if Namespace
+     *                   processing is not being performed.
+     * @param qName      The qualified name (with prefix), or the empty string if qualified names
+     *                   are not available. This tells us which element we're looking at.
      * @param attributes The attributes attached to the element. If there are no attributes, it
      *                   shall be an empty Attributes object.
      * @throws SAXException Any SAX exception, possibly wrapping another exception.
      * @see Attributes
-     *
+     * <p>
      * private static final java.util.Set<java.lang.String> ALLOWED_HIGHWAY_TYPES
-     * Only allow for non-service roads; this prevents going on pedestrian streets as much as possible.
-     * Note that in Berkeley, many of the campus roads are tagged as motor vehicle roads, but in practice
+     * Only allow for non-service roads; this prevents going on pedestrian
+     * streets as much as possible.
+     * Note that in Berkeley, many of the campus roads are tagged as motor vehicle roads,
+     * but in practice
      * we walk all over them with such impunity that we forget cars can actually drive on them.
-     *
-     *
      */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes)
@@ -85,11 +89,11 @@ public class GraphBuildingHandler extends DefaultHandler {
             // System.out.println("Node lon: " + attributes.getValue("lon"));
             // System.out.println("Node lat: " + attributes.getValue("lat"));
             /* We know we need lat lon and id of node so store this here.  Put node in graph
-            *  Nodes are connected by ways which we encounter next */
+             *  Nodes are connected by ways which we encounter next */
             nodeID = Long.parseLong(attributes.getValue("id"));
             nodeLon = Double.parseDouble(attributes.getValue("lon"));
             nodeLat = Double.parseDouble(attributes.getValue("lat"));
-            GraphDB.Vertex vertAdd = new GraphDB.Vertex(nodeLon,nodeLat,nodeID);
+            GraphDB.Vertex vertAdd = new GraphDB.Vertex(nodeLon, nodeLat, nodeID);
             g.addVertHelper(vertAdd);
             prevNodes.add(nodeID);
 
@@ -117,14 +121,14 @@ public class GraphBuildingHandler extends DefaultHandler {
             String k = attributes.getValue("k");
             String v = attributes.getValue("v");
             if (k.equals("maxspeed")) {
-                //System.out.println("Max Speed: " + v);
+                int i = 0;
             } else if (k.equals("highway")) {
                 //System.out.println("Highway type: " + v);
                 if (ALLOWED_HIGHWAY_TYPES.contains(v)) {
-                    validWay = true; // Dont need to worry about areas since this case takes care of them
+                    validWay = true;
                 }
             } else if (k.equals("name")) {
-                //System.out.println("Way Name: " + v);
+                int j = 0;
             }
             //System.out.println("Tag with k=" + k + ", v=" + v + ".");
         } else if (activeState.equals("node") && qName.equals("tag") && attributes.getValue("k")
@@ -142,13 +146,15 @@ public class GraphBuildingHandler extends DefaultHandler {
     /**
      * Receive notification of the end of an element. You may want to take specific terminating
      * actions here, like finalizing vertices or edges found.
-     * @param uri The Namespace URI, or the empty string if the element has no Namespace URI or
-     *            if Namespace processing is not being performed.
+     *
+     * @param uri       The Namespace URI, or the empty string if the element
+     *                  has no Namespace URI or
+     *                  if Namespace processing is not being performed.
      * @param localName The local name (without prefix), or the empty string if Namespace
      *                  processing is not being performed.
-     * @param qName The qualified name (with prefix), or the empty string if qualified names are
-     *              not available.
-     * @throws SAXException  Any SAX exception, possibly wrapping another exception.
+     * @param qName     The qualified name (with prefix), or the empty string if qualified names are
+     *                  not available.
+     * @throws SAXException Any SAX exception, possibly wrapping another exception.
      */
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
@@ -158,11 +164,11 @@ public class GraphBuildingHandler extends DefaultHandler {
             /* Hint: If you have stored the possible connections for this way, here's your chance to
              * actually connect the nodes together if the way is valid. */
             if (validWay) {
-                for (int i = 0; i < prevNodesWithinWay.size()-1; i++) {
+                for (int i = 0; i < prevNodesWithinWay.size() - 1; i++) {
                     long vertID1 = prevNodesWithinWay.get(i);
-                    long vertID2 = prevNodesWithinWay.get(i+1);
-                    double dist = g.distance(vertID1,vertID2);
-                    GraphDB.Edge e1 = new GraphDB.Edge(vertID1,vertID2, dist);
+                    long vertID2 = prevNodesWithinWay.get(i + 1);
+                    double dist = g.distance(vertID1, vertID2);
+                    GraphDB.Edge e1 = new GraphDB.Edge(vertID1, vertID2, dist);
                     g.addEdgeHelper(e1);
                 }
                 validWay = false;

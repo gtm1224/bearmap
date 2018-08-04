@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  * This graph is so small you can draw it out by hand and visually inspect the results!
  */
 public class TestRouterTiny {
-    private static final String OSM_DB_PATH_TINY = "../library-su18/bearmaps/tiny-clean.osm.xml";
+    private static final String OSM_DB_PATH_TINY = "/home/charles/Documents/su18-c-m-johnson/library-su18/bearmaps/tiny-clean.osm.xml";
     private static GraphDB graphTiny;
     private static boolean initialized = false;
 
