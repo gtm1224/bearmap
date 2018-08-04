@@ -6,16 +6,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Collections;
-import java.util.StringJoiner;
-import java.util.Arrays;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class TestRasterer {
     private static final double DOUBLE_THRESHOLD = 0.000000001;
@@ -48,7 +42,8 @@ public class TestRasterer {
         }
     }
 
-    private void assertResultParamsEquals(String err, RasterResultParams expected, RasterResultParams actual) {
+    private void assertResultParamsEquals(String err, RasterResultParams expected,
+                                          RasterResultParams actual) {
         assertEquals(err, expected.rasterUlLon, actual.rasterUlLon, DOUBLE_THRESHOLD);
         assertEquals(err, expected.rasterUlLat, actual.rasterUlLat, DOUBLE_THRESHOLD);
         assertEquals(err, expected.rasterLrLon, actual.rasterLrLon, DOUBLE_THRESHOLD);
