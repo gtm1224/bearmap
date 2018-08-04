@@ -65,7 +65,8 @@ public class GraphDB {
         ArrayList<Vertex> listVert = arrayListVertices();
         Collections.sort(listVert, new Vertex.SortByEuclid());
         //sort by uclidean distance from root lot and lan
-        kdtHelper(listVert, kdTree, 0);
+        KDT kdtCopy = new KDT(null);
+        kdTree.root = kdtHelper(listVert, kdtCopy, 0);
     }
 
     public KdTreeNode kdtHelper(ArrayList<Vertex> listVert, KDT currKDTree, int depth) {
@@ -77,24 +78,28 @@ public class GraphDB {
             Collections.sort(listVert, new Vertex.SortByY());
         }
         if (listVert.size() == 1) {
+            currKDTree.root = new KdTreeNode(null);
             currKDTree.root = new KdTreeNode(listVert.get(0));
             return currKDTree.root;
         } else if (listVert.size() == 2) {
             currKDTree.root = new KdTreeNode(listVert.get(1));
-            currKDTree.root.left = new KdTreeNode(listVert.get(0));
+            currKDTree.root.left = new KDT(listVert.get(0));
             return currKDTree.root;
         } else if (listVert.size() == 3) {
+            currKDTree.root.left = new KDT(listVert.get(0));
+            currKDTree.root.right = new KDT(listVert.get(2));
             currKDTree.root = new KdTreeNode(listVert.get(1));
-            currKDTree.root.left = new KdTreeNode(listVert.get(0));
-            currKDTree.root.right = new KdTreeNode(listVert.get(2));
+            //currKDTree.root.left.root = new KdTreeNode(listVert.get(0));
+            //currKDTree.root.right.root = new KdTreeNode(listVert.get(2));
             return currKDTree.root;
         }
         currKDTree.root = new KdTreeNode(listVert.get((listVert.size() / 2)));
         ArrayList<Vertex> first = new ArrayList<>(listVert.subList(0, listVert.size() / 2 - 1));
-        ArrayList<Vertex> second = new ArrayList<>(listVert.subList((listVert.size() / 2 + 1),
-                listVert.size()));
-        currKDTree.root.left = kdtHelper(first, currKDTree, depth + 1);
-        currKDTree.root.right = kdtHelper(second, currKDTree, depth + 1);
+        ArrayList<Vertex> second = new ArrayList<>(listVert.subList((listVert.size()/2),listVert.size()));
+        currKDTree.root.left = new KDT(null);
+        currKDTree.root.right = new KDT(null);
+        currKDTree.root.left.root = kdtHelper(first, currKDTree.root.left, depth + 1);
+        currKDTree.root.right.root = kdtHelper(second, currKDTree.root.right, depth + 1);
         return currKDTree.root;
 
     }
@@ -262,7 +267,7 @@ public class GraphDB {
      * @return The ID for the vertex closest to the <code>lon</code> and <code>lat</code>.
      */
     public long closest(double lon, double lat) {
-        long currMinID = getAllVert().first(); // Create a first vertex to compare against
+        /*long currMinID = getAllVert().first(); // Create a first vertex to compare against
         Vertex tempVert = new Vertex(lon, lat, (long) Math.abs(lat + lon));
         // Create a temporary vertex so we can use
         // the given distance method
@@ -279,49 +284,48 @@ public class GraphDB {
             }
         }
         removeVert(tempVert.vertID);
-        return currMinID;
+        return currMinID;*/
         //Perform nearest neighbor search for given point
-        /*int depth = 0;
+        int depth = 0;
         Vertex vertDesired = new Vertex(lon,lat,-00);
-        kdTreeNode closestNode = closestHelper(depth, vertDesired,kdTree.root,kdTree.root);
-        return closestNode.vert.vertID;*/
-
-        /*Replace closes with call to k-d tree*/
+        double currDist = euclidean(projectToX(lon,lat), kdTree.root.x, projectToY(lon,lat), kdTree.root.y);
+        KdTreeNode closestNode = closestHelper(depth, vertDesired,kdTree,kdTree.root,currDist);
+        return closestNode.vert.vertID;
     }
 
-    public KdTreeNode closestHelper(int depth, Vertex vertGiven, KdTreeNode root, KdTreeNode best) {
+    public KdTreeNode closestHelper(int depth, Vertex vertGiven, KDT tree, KdTreeNode best, double currMin) {
         int axis = depth % 2;
         // if axis == 0 sort on x, if axis == 1 sort on y
         double vertX = projectToX(vertGiven.lon, vertGiven.lat);
         double vertY = projectToY(vertGiven.lon, vertGiven.lat);
 
-        if (root.left == null && root.right == null) {
+        if (tree.root.left == null && tree.root.right == null) {
             //Reached root, save root as best
-            return root;
+            double newDist = euclidean(vertX,tree.root.x,vertY,tree.root.y);
+            if (newDist < currMin) {
+                best = tree.root;
+                return best;
+            }
         } else {
             if (axis == 0) {
-                if (vertX > root.x) {
-                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, root.right, best);
-                } else if (vertX < root.x) {
-                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, root.left, best);
+                if (vertX > tree.root.x) {
+                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.right, best, currMin);
+                    return currBest;
+                } else if (vertX < tree.root.x) {
+                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.left, best, currMin);
+                    return currBest;
                 }
             } else if (axis == 1) {
-                if (vertY > root.y) {
-                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, root.right, best);
-                } else if (vertY < root.y) {
-                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, root.left, best);
+                if (vertY > tree.root.y) {
+                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.right, best, currMin);
+                    return currBest;
+                } else if (vertY < tree.root.y) {
+                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.left, best, currMin);
+                    return currBest;
                 }
             }
-
         }
-
-        double dist1 = root.euclideanKD(vertX, vertY);
-        double dist2 = best.euclideanKD(vertX, vertY);
-        if (dist1 < dist2) {
-            return root;
-        } else {
-            return best;
-        }
+        return best;
 
     }
 
@@ -506,13 +510,20 @@ public class GraphDB {
         GraphDB.Vertex vert;
         Double x;
         Double y;
-        KdTreeNode left;
-        KdTreeNode right;
+        KDT left;
+        KDT right;
 
         KdTreeNode(Vertex vert) {
             this.vert = vert;
-            this.x = projectToX(vert.lon, vert.lat);
-            this.y = projectToY(vert.lon, vert.lat);
+            if (!(vert == null)) {
+                this.x = projectToX(vert.lon, vert.lat);
+                this.y = projectToY(vert.lon, vert.lat);
+            } else {
+                this.x = 0.0;
+                this.y = 0.0;
+            }
+            left = null;
+            right = null;
         }
 
         public double euclideanKD(double lon, double lat) {
@@ -525,8 +536,8 @@ public class GraphDB {
     static class KDT {
         KdTreeNode root;
 
-        KDT(KdTreeNode t) {
-            root = t;
+        KDT(Vertex root) {
+            this.root = new KdTreeNode(root);
         }
     }
 
