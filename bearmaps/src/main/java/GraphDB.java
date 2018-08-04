@@ -25,10 +25,12 @@ public class GraphDB {
      * @param dbPath Path to the XML file to be parsed.
      */
 
-    private HashMap<Long, Node> IDtoNode= new HashMap();
+    private HashMap<Long, Node> IDtoNode = new HashMap();
     /* edges maps a Node to a hashset(neightbor) of its edges */
-    private HashMap<Long,HashSet<Edge>> edges = new HashMap<>();
+    private HashMap<Long, HashSet<Edge>> edges = new HashMap<>();
     private HashMap<Long, HashSet<Long>> neighbors = new HashMap<>();
+    ArrayList<Node> sortbyXY = new ArrayList<>();
+    Node medianx=new Node(38,122,50);
 
     /* allEdges contains all edges in graph (might not implement*/
     private TreeSet<Edge> allEdges = new TreeSet<>();
@@ -55,6 +57,9 @@ public class GraphDB {
             e.printStackTrace();
         }
         clean();
+        for (Node n : IDtoNode.values()) {
+            sortbyXY.add(n);
+        }
     }
 
     /**
@@ -73,17 +78,17 @@ public class GraphDB {
      * we can reasonably assume this since typically roads are connected.
      */
     private void clean() {
-        ArrayList<Long> removeID=new ArrayList<>();
-        for(long nodeid: neighbors.keySet()){
-          if(neighbors.get(nodeid).isEmpty()){
-              removeID.add(nodeid);
-          }
-      }
-      for(long nodeid : removeID){
+        ArrayList<Long> removeID = new ArrayList<>();
+        for (long nodeid : neighbors.keySet()) {
+            if (neighbors.get(nodeid).isEmpty()) {
+                removeID.add(nodeid);
+            }
+        }
+        for (long nodeid : removeID) {
             neighbors.remove(nodeid);
             IDtoNode.remove(nodeid);
             edges.remove(nodeid);
-      }
+        }
     }
 
     /**
@@ -123,7 +128,7 @@ public class GraphDB {
      * iterable if the vertex is not in the graph.
      */
     Iterable<Long> adjacent(long v) {
-        if(IDtoNode.containsKey(v)) {
+        if (IDtoNode.containsKey(v)) {
             return new HashSet<>(neighbors.get(v));
         }
         return new HashSet<>();
@@ -149,7 +154,8 @@ public class GraphDB {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c;
     }
-    public double distance(double lon1, double lon2, double lat1, double lat2){
+
+    public double distance(double lon1, double lon2, double lat1, double lat2) {
         double phi1 = Math.toRadians(lat1);
         double phi2 = Math.toRadians(lat2);
         double dphi = Math.toRadians(lat2 - lat1);
@@ -160,8 +166,9 @@ public class GraphDB {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c;
     }
-    public double distance(double lon1, double lat1, long nodeid){
-        return distance(lon1,lon(nodeid),lat1,lat(nodeid));
+
+    public double distance(double lon1, double lat1, long nodeid) {
+        return distance(lon1, lon(nodeid), lat1, lat(nodeid));
     }
 
     /**
@@ -172,16 +179,73 @@ public class GraphDB {
      * @return The ID for the vertex closest to the <code>lon</code> and <code>lat</code>.
      */
     public long closest(double lon, double lat) {
-        double closest =1000000000;
-        long closestid=1000000000;
-        for(long id:IDtoNode.keySet()){
-            if(distance(lon,lat,id)<closest){
-                closest=distance(lon,lat,id);
-                closestid=id;
-            }
-        }
-        return closestid;
+        //double closest = 1000000000;
+        //long closestid = 1000000000;
+         medianx=kdtree(medianx, sortbyXY, 0);
+         double inputx=projectToX(lon,lat);
+         double inputy=projectToY(lon,lat);
+         Node compare=medianx;
+         int depth=0;
+         long nodeID=compare.id;
+         while(true){
+             double dx=inputx-compare.x;
+             double dy=inputy-compare.y;
+             if(dx==0 && dy==0){
+                 return nodeID;
+             }
+             if(depth%2==0) {
+                 if (dx > 0) {
+                     compare = compare.right;
+                 }else{
+                     compare=compare.left;
+                 }
+                 depth+=1;
+             }else{
+
+             }
+
+         }//TODO: find the way to search
+        return nodeID;
     }
+
+    public Node kdtree(Node median, List<Node> sortby, int depth) {
+        if (sortby.size() == 1) {
+           median=sortby.get(0);
+           return median;
+        } else if (depth % 2 == 0) {
+            Collections.sort(sortby, new Comparator<Node>() {
+                @Override
+                public int compare(Node node1, Node node2) {
+                    return Double.compare(node1.x, node2.x);
+                }
+            });
+
+        } else {
+            Collections.sort(sortby, new Comparator<Node>() {
+                @Override
+                public int compare(Node node1, Node node2) {
+                    return Double.compare(node1.y, node2.y);
+                }
+
+            });
+        }
+
+        median = sortby.get(sortby.size() / 2);
+        if(sortby.size()==2){
+            ArrayList<Node> left=new ArrayList<>();
+            ArrayList<Node> right=new ArrayList<>();
+            left.add(sortby.get(0));
+            right.add(sortby.get(1));
+            median.left =kdtree(median.left,left, depth + 1);
+            median.right = kdtree(median.right,right , depth + 1);
+        }else{
+            median.left =kdtree(median.left,sortby.subList(0, sortby.size() / 2), depth + 1);
+            median.right = kdtree(median.right,sortby.subList((sortby.size() /2)+1,sortby.size())  , depth + 1);
+        }
+
+        return median;
+    }
+
 
     /**
      * Return the Euclidean x-value for some point, p, in Berkeley. Found by computing the
@@ -261,18 +325,19 @@ public class GraphDB {
         x -= Math.sin(phi1) * Math.cos(phi2) * Math.cos(lambda2 - lambda1);
         return Math.toDegrees(Math.atan2(y, x));
     }
-    public void addNode(double lat, double lon, long id){
-        if(!IDtoNode.containsKey(id)){
-            IDtoNode.put(id,new Node(lat,lon,id));
-            neighbors.put(id,new HashSet<>());
-            edges.put(id,new HashSet<>());
+
+    public void addNode(double lat, double lon, long id) {
+        if (!IDtoNode.containsKey(id)) {
+            IDtoNode.put(id, new Node(lat, lon, id));
+            neighbors.put(id, new HashSet<>());
+            edges.put(id, new HashSet<>());
         }
 
     }
 
-    public void addEdge(long source, long dest){
-        Edge srcTodest= new Edge(source,dest,distance(source,dest));//source to dest edge
-        Edge destTosrc= new Edge(dest,source,distance(dest,source));//dest to source edge
+    public void addEdge(long source, long dest) {
+        Edge srcTodest = new Edge(source, dest, distance(source, dest));//source to dest edge
+        Edge destTosrc = new Edge(dest, source, distance(dest, source));//dest to source edge
         neighbors.get(source).add(dest);
         neighbors.get(dest).add(source);
         edges.get(source).add(srcTodest);
@@ -303,18 +368,25 @@ public class GraphDB {
         private double lat;
         private double lon;
         private long id;
-        private String  Name;
+        private String Name;
+        private double x;
+        private double y;
+        private Node left;
+        private Node right;
 
         public Node(double lat, double lon, long id) {
             this.lat = lat;
             this.lon = lon;
             this.id = id;
+            this.x = projectToX(lon, lat);
+            this.y = projectToY(lon, lat);
         }
-        public Node(double lat, double lon, long id,String name) {
+
+        public Node(double lat, double lon, long id, String name) {
             this.lat = lat;
             this.lon = lon;
             this.id = id;
-            this.Name=name;
+            this.Name = name;
         }
 
         public void setName(String name) {
@@ -339,6 +411,7 @@ public class GraphDB {
         }
 
     }
+
     public class Edge implements Comparable<Edge> {
 
         private long src;
@@ -368,7 +441,7 @@ public class GraphDB {
         }
 
         public int compareTo(Edge other) {
-            double cmp =  weight - other.weight;
+            double cmp = weight - other.weight;
             return (int) cmp;
         }
 
