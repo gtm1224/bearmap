@@ -82,23 +82,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Rasterer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Rasterer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="75" column="47" lean-forward="true" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+            <state relative-caret-position="124">
+              <caret line="140" column="62" selection-start-line="140" selection-start-column="62" selection-end-line="140" selection-end-column="62" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#4104#4105#0" expanded="true" />
+                <element signature="e#4150#4151#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestRasterer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestRasterer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/TestRasterer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+            <state relative-caret-position="189">
+              <caret line="32" column="22" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -170,7 +171,6 @@
       <find>addEdge</find>
       <find>allEdge</find>
       <find>graph</find>
-      <find>system</find>
       <find>close</find>
       <find>projec</find>
       <find>vertNeighbors</find>
@@ -180,6 +180,7 @@
       <find>euclidian</find>
       <find>system.out</find>
       <find>syste</find>
+      <find>system</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -196,8 +197,8 @@
         <option value="$PROJECT_DIR$/src/main/java/Router.java" />
         <option value="$PROJECT_DIR$/src/main/java/GraphBuildingHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/RasterRequestParams.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Rasterer.java" />
         <option value="$PROJECT_DIR$/src/test/java/TestRasterer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Rasterer.java" />
       </list>
     </option>
   </component>
@@ -496,6 +497,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="25" width="1319" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="8" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -873,22 +875,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/TestRasterer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="75" column="47" lean-forward="true" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+        <state relative-caret-position="189">
+          <caret line="32" column="22" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/TestRasterer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Rasterer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+        <state relative-caret-position="124">
+          <caret line="140" column="62" selection-start-line="140" selection-start-column="62" selection-end-line="140" selection-end-column="62" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4104#4105#0" expanded="true" />
+            <element signature="e#4150#4151#0" expanded="true" />
           </folding>
         </state>
       </provider>
