@@ -298,6 +298,7 @@ public class GraphDB {
         // if axis == 0 sort on x, if axis == 1 sort on y
         double vertX = projectToX(vertGiven.lon, vertGiven.lat);
         double vertY = projectToY(vertGiven.lon, vertGiven.lat);
+        double newcurrMin = euclidean(best.x,vertX,best.y,vertY);
 
         if (tree.root.left == null && tree.root.right == null) {
             //Reached root, save root as best
@@ -306,27 +307,34 @@ public class GraphDB {
                 best = tree.root;
                 return best;
             }
+            return best;
         } else {
             if (axis == 0) {
-                if (vertX > tree.root.x) {
-                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.right, best, currMin);
-                    return currBest;
-                } else if (vertX < tree.root.x) {
-                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.left, best, currMin);
+                if (!(tree.root.left == null)) {
+                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.left, best, newcurrMin);
+                    if (!(tree.root.right == null)) {
+                        if (euclidean(currBest.x,vertX,currBest.y,vertY) >= tree.root.right.root.x) {
+                            currBest = closestHelper(depth + 1, vertGiven, tree.root.right, best, newcurrMin);
+                            return currBest;
+                        }
+
+                    }
                     return currBest;
                 }
             } else if (axis == 1) {
-                if (vertY > tree.root.y) {
-                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.right, best, currMin);
-                    return currBest;
-                } else if (vertY < tree.root.y) {
-                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.left, best, currMin);
+                if (!(tree.root.left == null)) {
+                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.left, best, newcurrMin);
+                    if (!(tree.root.right == null)) {
+                        if (vertY + euclidean(currBest.x,vertX,currBest.y,vertY) >= tree.root.right.root.y) {
+                            currBest = closestHelper(depth + 1, vertGiven, tree.root.right, best, newcurrMin);
+                            return currBest;
+                        }
+                    }
                     return currBest;
                 }
             }
+            return best;
         }
-        return best;
-
     }
 
     /**
