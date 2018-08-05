@@ -179,13 +179,22 @@ public class GraphDB {
      * @return The ID for the vertex closest to the <code>lon</code> and <code>lat</code>.
      */
     public long closest(double lon, double lat) {
-         medianx=kdtree(medianx, sortbyXY, 0);//build kd tree
-         double inputx=projectToX(lon,lat);
-         double inputy=projectToY(lon,lat);
-        double dx=inputx-medianx.x;
-        double dy=inputy-medianx.y;
-        double bestdistance=Math.sqrt(dx*dx+dy*dy);
-         return findclosesthelper(medianx.left,medianx,inputx,inputy,bestdistance).id;
+         //medianx=kdtree(medianx, sortbyXY, 0);//build kd tree
+         //double inputx=projectToX(lon,lat);
+        // double inputy=projectToY(lon,lat);
+        //double dx=inputx-medianx.x;
+       // double dy=inputy-medianx.y;
+       // double bestdistance=Math.sqrt(dx*dx+dy*dy);
+        // return findclosesthelper(medianx.left,medianx,inputx,inputy,bestdistance).id;
+        double closest=10000000;
+        long closestid=1000000;
+        for (long id : IDtoNode.keySet()) {
+            if (distance(lon, lat, id) < closest) {
+                closest = distance(lon, lat, id);
+                closestid = id;
+            }
+        }
+        return closestid;
 
     }
 
