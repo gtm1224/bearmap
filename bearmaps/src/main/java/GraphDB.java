@@ -179,38 +179,54 @@ public class GraphDB {
      * @return The ID for the vertex closest to the <code>lon</code> and <code>lat</code>.
      */
     public long closest(double lon, double lat) {
-        //double closest = 1000000000;
-        //long closestid = 1000000000;
-         medianx=kdtree(medianx, sortbyXY, 0);
+         medianx=kdtree(medianx, sortbyXY, 0);//build kd tree
          double inputx=projectToX(lon,lat);
          double inputy=projectToY(lon,lat);
-         Node compare=medianx;
-         int depth=0;
-         long nodeID=compare.id;
-         while(true){
-             double dx=inputx-compare.x;
-             double dy=inputy-compare.y;
-             if(dx==0 && dy==0){
-                 return nodeID;
-             }
-             if(depth%2==0) {
-                 if (dx > 0) {
-                     compare = compare.right;
-                 }else{
-                     compare=compare.left;
-                 }
-                 depth+=1;
-             }else{
+        double dx=inputx-medianx.x;
+        double dy=inputy-medianx.y;
+        double bestdistance=Math.sqrt(dx*dx+dy*dy);
+         return findclosesthelper(medianx.left,medianx,inputx,inputy,bestdistance).id;
 
-             }
+    }
 
-         }//TODO: find the way to search
-        return nodeID;
+    public Node findclosesthelper(Node next, Node bestsofar, double inputx, double inputy,double bestdistance){
+        double dx=inputx-next.x;
+        double dy=inputy-next.y;
+        double r=Math.sqrt(dx*dx+dy*dy);
+        int axis=next.depth%2;
+        if(r>bestdistance){
+            if(axis==0){
+                if(next.equals(bestsofar.right)) {
+                    if (Math.abs(dx) > bestdistance && bestsofar.left != null) {
+                        bestsofar = findclosesthelper(bestsofar.left, bestsofar, inputx, inputy, bestdistance);
+                    }
+                }
+                if(next.equals(bestsofar.left)) {
+                    if (Math.abs(dx) > bestdistance && bestsofar.right != null) {
+                        bestsofar = findclosesthelper(bestsofar.right, bestsofar, inputx, inputy, bestdistance);
+                    }
+                }
+            }else{
+                //if ()
+            }
+        }
+
+
+
+
+
+
+
+
+
+        return bestsofar;
+
     }
 
     public Node kdtree(Node median, List<Node> sortby, int depth) {
         if (sortby.size() == 1) {
            median=sortby.get(0);
+           median.depth=depth;
            return median;
         } else if (depth % 2 == 0) {
             Collections.sort(sortby, new Comparator<Node>() {
@@ -231,6 +247,7 @@ public class GraphDB {
         }
 
         median = sortby.get(sortby.size() / 2);
+        median.depth=depth;
         if(sortby.size()==2){
             ArrayList<Node> left=new ArrayList<>();
             ArrayList<Node> right=new ArrayList<>();
@@ -373,6 +390,7 @@ public class GraphDB {
         private double y;
         private Node left;
         private Node right;
+        private int depth;
 
         public Node(double lat, double lon, long id) {
             this.lat = lat;

@@ -3,24 +3,33 @@ import java.util.Arrays;
 /**
  * The RasterResultParams contains the fields computed by Rasterer.getMapRaster. The MapServer will
  * render the image based on the values for the renderGrid and bounding box specified in this class.
- *
+ * <p>
  * This class uses a Builder pattern to manage its arguments and cannot be instantiated directly.
  * Use the Builder class, RasterResultParams.Builder, to create new RasterResultParams objects.
  *
  * @author Kevin Lin
  */
 public class RasterResultParams {
-    /** The grid of images to display. */
+    /**
+     * The grid of images to display.
+     */
     public final String[][] renderGrid;
-    /** The bounding upper-left, lower-right longitudes and latitudes of the final image. */
+    /**
+     * The bounding upper-left, lower-right longitudes and latitudes of the final image.
+     */
     public final double rasterUlLon, rasterUlLat, rasterLrLon, rasterLrLat;
-    /** The depth of the chosen images. */
+    /**
+     * The depth of the chosen images.
+     */
     public final int depth;
-    /** True if the query was successful. */
+    /**
+     * True if the query was successful.
+     */
     public final boolean querySuccess;
 
     /**
      * Factory method which returns a new RasterResultParams instance representing a failed query.
+     *
      * @return A RasterResultParams instance with querySuccess set to false.
      */
     public static RasterResultParams queryFailed() {
@@ -35,7 +44,7 @@ public class RasterResultParams {
         this(null, 0.0, 0.0, 0.0, 0.0, 0, false);
     }
 
-    public RasterResultParams(
+    private RasterResultParams(
             String[][] renderGrid,
             double rasterUlLon, double rasterUlLat, double rasterLrLon, double rasterLrLat,
             int depth, boolean querySuccess) {
@@ -75,13 +84,21 @@ public class RasterResultParams {
      * @author Kevin Lin
      */
     public static class Builder {
-        /** The grid of images to display. */
+        /**
+         * The grid of images to display.
+         */
         private String[][] renderGrid;
-        /** The bounding upper-left, lower-right longitudes and latitudes of the final image. */
+        /**
+         * The bounding upper-left, lower-right longitudes and latitudes of the final image.
+         */
         private double rasterUlLon, rasterUlLat, rasterLrLon, rasterLrLat;
-        /** The depth of the chosen images. */
+        /**
+         * The depth of the chosen images.
+         */
         private int depth;
-        /** True if the query was successful. */
+        /**
+         * True if the query was successful.
+         */
         private boolean querySuccess;
 
         /**
@@ -94,6 +111,7 @@ public class RasterResultParams {
         /**
          * Creates a RasterResultParams.Builder instance from a RasterResultParams instance with the
          * same values as the previously built RasterResultParams.
+         *
          * @param rrp RasterResultParams to copy
          */
         public Builder(RasterResultParams rrp) {
@@ -108,6 +126,7 @@ public class RasterResultParams {
 
         /**
          * Sets the value for this Builder's renderGrid.
+         *
          * @param grid The computed renderGrid.
          * @return This Builder instance.
          */
@@ -118,6 +137,7 @@ public class RasterResultParams {
 
         /**
          * Sets the value for this Builder's rasterUlLon.
+         *
          * @param ullon The computed upper-left longitude.
          * @return This Builder instance.
          */
@@ -128,6 +148,7 @@ public class RasterResultParams {
 
         /**
          * Sets the value for this Builder's rasterUlLat.
+         *
          * @param ullat The computed upper-left latitude.
          * @return This Builder instance.
          */
@@ -138,6 +159,7 @@ public class RasterResultParams {
 
         /**
          * Sets the value for this Builder's rasterLrLon.
+         *
          * @param lrlon The computed lower-right longitude.
          * @return This Builder instance.
          */
@@ -148,6 +170,7 @@ public class RasterResultParams {
 
         /**
          * Sets the value for this Builder's rasterLrLat.
+         *
          * @param lrlat The computed lower-right latitude.
          * @return This Builder instance.
          */
@@ -158,6 +181,7 @@ public class RasterResultParams {
 
         /**
          * Sets the value for this Builder's depth.
+         *
          * @param d The computed depth of the images.
          * @return This Builder instance.
          */
@@ -168,6 +192,7 @@ public class RasterResultParams {
 
         /**
          * Sets the value for this Builder's querySuccess.
+         *
          * @param success Whether the query was a success or not.
          * @return This Builder instance.
          */
@@ -178,6 +203,7 @@ public class RasterResultParams {
 
         /**
          * Returns a validated RasterResultParams instance with the same values as this Builder.
+         *
          * @return A new RasterResultParams instance with the same values as this Builder.
          * @throws IllegalStateException If any of the RasterResultParams' values are invalid.
          */
