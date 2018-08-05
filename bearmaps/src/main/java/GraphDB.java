@@ -266,16 +266,91 @@ public class GraphDB {
      */
     public long closest(double lon, double lat) {
         int depth = 0;
-        Vertex vertDesired = new Vertex(lon, lat, -00);
-        addVert(-00, lat, lon);
-        KdTreeNode closestNode = closestHelper(depth, vertDesired, kdTree, kdTree.root);
-        removeVert(-00);
+        Vertex vertDesired = new Vertex(lon, lat, 999999999);
+        addVertHelper(vertDesired);
+        double queryX = projectToX(vertDesired.lon, vertDesired.lat);
+        double queryY = projectToY(vertDesired.lon, vertDesired.lat);
+        KdTreeNode closestNode = closestHelper
+                (depth, queryX, queryY, kdTree, kdTree.root, vertDesired);
+        removeVert(vertDesired.vertID);
         return closestNode.vert.vertID;
     }
 
 
-    public KdTreeNode closestHelper(int depth, Vertex searchVert, KDT tree, KdTreeNode best) {
+    public KdTreeNode closestHelper(int depth, double queryX, double queryY, KDT tree,
+                                    KdTreeNode currBest, Vertex searchVert) {
         int axis = depth % 2;
+        double cmp = 0.0;
+        KdTreeNode currentRoot = tree.root;
+        KdTreeNode currentBest = currBest;
+        double query = 0.0;
+        if (axis == 0) {
+            cmp = tree.root.x - queryX;
+            query = queryX;
+        } else if (axis == 1) {
+            cmp = tree.root.y - queryY;
+            query = queryY;
+        }
+        if (tree.root.right == null && tree.root.left == null) {
+            return tree.root;
+        } else if ((tree.root.right == null) || cmp > 0) {
+            currentBest = closestHelper
+                    (depth + 1, queryX, queryY, tree.root.left, tree.root, searchVert);
+        } else if (tree.root.left == null || cmp < 0) {
+            currentBest = closestHelper
+                    (depth + 1, queryX, queryY, tree.root.right, tree.root, searchVert);
+        }
+        double euclidCurrRoot = euclidean(currentRoot.x, queryX, currentRoot.y, queryY);
+        double euclidBestNode = euclidean(currentBest.x, queryX, currentBest.y, queryY);
+        double gcCurrNode = distance(currentRoot.vert.vertID, searchVert.vertID);
+        double gcBestNode = distance(currentBest.vert.vertID, searchVert.vertID);
+        double newMin = euclidBestNode;
+        if (euclidCurrRoot < euclidBestNode) {
+            newMin = euclidCurrRoot;
+        }
+        if (gcCurrNode < gcBestNode) {
+            currentBest = currentRoot;
+        }
+        double dimCurrentBest = 0.0;
+        double euclidCheckHyperPlane = 0.0;
+        if (axis == 0) {
+            dimCurrentBest = currentBest.x;
+            euclidCheckHyperPlane = euclidean(dimCurrentBest, queryX, 0, 0);
+        } else if (axis == 1) {
+            dimCurrentBest = currentBest.y;
+            euclidCheckHyperPlane = euclidean(0, 0, dimCurrentBest, queryY);
+        }
+
+        if (euclidCheckHyperPlane < newMin) {
+            KdTreeNode currentBest2 = null;
+            if (axis == 0) {
+                cmp = tree.root.x - queryX;
+                query = queryX;
+            } else if (axis == 1) {
+                cmp = tree.root.y - queryY;
+                query = queryY;
+            }
+            KdTreeNode currentRoot2 = currentBest;
+            if (tree.root.left == null && tree.root.right == null) {
+                currentBest2 = tree.root;
+                return currentBest2;
+            } else if ((tree.root.right == null) || cmp < 0) {
+                currentBest2 = closestHelper
+                        (depth + 1, queryX, queryY, tree.root.left, tree.root, searchVert);
+            } else if (tree.root.left == null || cmp > 0) {
+                currentBest2 = closestHelper
+                        (depth + 1, queryX, queryY, tree.root.right, tree.root, searchVert);
+            }
+            double gcCurrRoot2 = distance(searchVert.vertID, currentRoot2.vert.vertID);
+            double gcBestNode2 = distance(currentBest2.vert.vertID, searchVert.vertID);
+            if (gcCurrRoot2 < gcBestNode2) {
+                return currentRoot2;
+            }
+            return currentBest2;
+        }
+        return currentBest;
+    }
+        /*int axis = depth % 2;
         double queryX = projectToX(searchVert.lon, searchVert.lat);
         double queryY = projectToY(searchVert.lon, searchVert.lat);
         KdTreeNode currentBest = best;
@@ -344,7 +419,7 @@ public class GraphDB {
             }
         }
         return currentBest;
-    }
+    }*/
 
     /**
      * Return the Euclidean x-value for some point, p, in Berkeley. Found by computing the
