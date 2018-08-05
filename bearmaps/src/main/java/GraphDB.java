@@ -287,9 +287,6 @@ public class GraphDB {
             if (!(tree.root.left == null)) {
                 KdTreeNode currentNode = tree.root;
                 currentBest = closestHelper(depth + 1, searchVert, tree.root.left, currentNode);
-                System.out.println("Accessed following nodes in axis == 0");
-                System.out.println("currentNode is " + currentNode.vert.vertID);
-                System.out.println("currentBest is " + currentBest.vert.vertID);
                 double euclidCurrNode = euclidean(currentNode.x, queryX, currentNode.y, queryY);
                 double euclidBestNode = euclidean(currentBest.x, queryX, currentBest.y, queryY);
                 double gcCurrNode = distance(currentNode.vert.vertID, searchVert.vertID);
@@ -304,16 +301,11 @@ public class GraphDB {
                 if (euclidean(currentBest.x, queryX, 0, 0) < newMin) {
                     KdTreeNode currentRoot = currentBest;
                     if (!(tree.root.right == null)) {
-                        System.out.println("Accessed right root in axis == 0");
                         System.out.println(currentRoot.vert.vertID);
                         KdTreeNode currentBest2 = closestHelper
                                 (depth + 1, searchVert, tree.root.right, currentRoot);
                         System.out.println(currentBest2.vert.vertID);
-                        double euclidCurrRoot = euclidean
-                                (currentRoot.x, queryX, currentRoot.y, queryY);
                         double gcCurrRoot = distance(searchVert.vertID, currentRoot.vert.vertID);
-                        double euclidBestNode2 = euclidean
-                                (currentBest2.x, queryX, currentBest2.y, queryY);
                         double gcBestNode2 = distance(currentBest2.vert.vertID, searchVert.vertID);
                         if (gcCurrRoot < gcBestNode2) {
                             return currentRoot;
@@ -328,9 +320,6 @@ public class GraphDB {
             if (!(tree.root.left == null)) {
                 KdTreeNode currentNode = tree.root;
                 currentBest = closestHelper(depth + 1, searchVert, tree.root.left, currentNode);
-                System.out.println("Accessed these nodes in axis == 1");
-                System.out.println("currentNode is " + currentNode.vert.vertID);
-                System.out.println("currentBest is " + currentBest.vert.vertID);
                 double euclidCurrNode = euclidean(currentNode.x, queryX, currentNode.y, queryY);
                 double euclidBestNode = euclidean(currentBest.x, queryX, currentBest.y, queryY);
                 double gcCurrNode = distance(currentNode.vert.vertID, searchVert.vertID);
@@ -342,19 +331,12 @@ public class GraphDB {
                 if (gcCurrNode < gcBestNode) {
                     currentBest = currentNode;
                 }
-                if (euclidean(0,0,currentBest.y,queryY) < newMin) { // check if in other tree
+                if (euclidean(0, 0, currentBest.y, queryY) < newMin) { // check if in other tree
                     KdTreeNode currentRoot = currentBest;
-                    System.out.println("Accessed right subtree in axis == 1");
-                    System.out.println("currentRoot is " + currentBest.vert.vertID);
                     if (!(tree.root.right == null)) {
                         KdTreeNode currentBest2 = closestHelper
                                 (depth + 1, searchVert, tree.root.right, currentRoot);
-                        System.out.println("currentBest2 is " + currentBest2.vert.vertID);
-                        double euclidCurrRoot =
-                                euclidean(currentRoot.x, queryX, currentRoot.y, queryY);
                         double gcCurrRoot = distance(currentRoot.vert.vertID, searchVert.vertID);
-                        double euclidBestNode2 =
-                                euclidean(currentBest2.x, queryX, currentBest2.y, queryY);
                         double gcBestNode2 = distance(currentBest2.vert.vertID, searchVert.vertID);
                         if (gcCurrRoot < gcBestNode2) {
                             return currentRoot;
