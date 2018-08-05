@@ -267,6 +267,7 @@ public class GraphDB {
      * @return The ID for the vertex closest to the <code>lon</code> and <code>lat</code>.
      */
     public long closest(double lon, double lat) {
+        double globalMin = 100000000000.0;
         /*long currMinID = getAllVert().first(); // Create a first vertex to compare against
         Vertex tempVert = new Vertex(lon, lat, (long) Math.abs(lat + lon));
         // Create a temporary vertex so we can use
@@ -289,32 +290,99 @@ public class GraphDB {
         int depth = 0;
         Vertex vertDesired = new Vertex(lon,lat,-00);
         double currDist = euclidean(projectToX(lon,lat), kdTree.root.x, projectToY(lon,lat), kdTree.root.y);
-        KdTreeNode closestNode = closestHelper(depth, vertDesired,kdTree,kdTree.root,currDist);
+        KdTreeNode closestNode = closestHelper(depth, vertDesired,kdTree,kdTree.root);
         return closestNode.vert.vertID;
     }
 
-    public KdTreeNode closestHelper(int depth, Vertex vertGiven, KDT tree, KdTreeNode best, double currMin) {
+    private double globalMin = 0;
+
+    public KdTreeNode closestHelper(int depth, Vertex searchVert, KDT tree, KdTreeNode best) {
         int axis = depth % 2;
         // if axis == 0 sort on x, if axis == 1 sort on y
-        double vertX = projectToX(vertGiven.lon, vertGiven.lat);
-        double vertY = projectToY(vertGiven.lon, vertGiven.lat);
-        double newcurrMin = euclidean(best.x,vertX,best.y,vertY);
+        double queryX = projectToX(searchVert.lon, searchVert.lat);
+        double queryY = projectToY(searchVert.lon, searchVert.lat);
+        KdTreeNode currentBest = best;
 
         if (tree.root.left == null && tree.root.right == null) {
+            //Reached leaf node, save as best
+            return tree.root;
+        }
+        if (axis == 0) {
+            if (!(tree.root.left == null)) {
+                KdTreeNode currentNode = tree.root;
+                currentBest = closestHelper(depth + 1, searchVert, tree.root.left, best);
+                double euclidCurrNode = euclidean(currentNode.x, queryX, currentNode.y, queryY);
+                double euclidBestNode = euclidean(currentBest.x, queryX, currentBest.y, queryY);
+/*                double gcCurrNode = distance(currentNode.vert.vertID,searchVert.vertID);
+                double gcBestNode = distance(currentBest.vert.vertID,searchVert.vertID);*/
+                double newMin = 0.0;
+                if (euclidCurrNode< euclidBestNode) {
+                    currentBest = currentNode;
+                    newMin = euclidCurrNode;
+                }
+                newMin = euclidBestNode;
+                if (Math.abs(tree.root.x - queryX) < newMin) {
+                    KdTreeNode currentRoot = tree.root;
+                    if (!(tree.root.right == null)) {
+                        currentBest = closestHelper(depth + 1, searchVert, tree.root.right, best);
+                        double euclidCurrRoot = euclidean(currentRoot.x, queryX, currentRoot.y, queryY);
+                        euclidBestNode = euclidean(currentBest.x, queryX, currentBest.y, queryY);
+                        if (euclidCurrRoot < euclidBestNode) {
+                            currentBest = currentRoot;
+                        }
+                    }
+                }
+            }
+            return currentBest;
+        }
+        if (axis == 1) {
+            if (!(tree.root.left == null)) {
+                KdTreeNode currentNode = tree.root;
+                currentBest = closestHelper(depth + 1, searchVert, tree.root.left, best);
+                double euclidCurrNode = euclidean(currentNode.x, queryX, currentNode.y, queryY);
+                double euclidBestNode = euclidean(currentBest.x, queryX, currentBest.y, queryY);
+                double newMin = 0.0;
+                if (euclidCurrNode < euclidBestNode) {
+                    currentBest = currentNode;
+                    newMin = euclidCurrNode;
+                }
+                newMin = euclidBestNode;
+                if (Math.abs(tree.root.y - queryY) < newMin) {
+                    KdTreeNode currentRoot = tree.root;
+                    if (!(tree.root.right==null)) {
+                        currentBest = closestHelper(depth + 1, searchVert, tree.root.right, best);
+                        double euclidCurrRoot = euclidean(currentRoot.x, queryX, currentRoot.y, queryY);
+                        euclidBestNode = euclidean(currentBest.x, queryX, currentBest.y, queryY);
+                        if (euclidCurrRoot < euclidBestNode) {
+                            currentBest = currentRoot;
+                        }
+                    }
+                }
+            }
+            return currentBest;
+        }
+
+        //By now we have traversed entire tree and determined our best node, now check other side;
+        return currentBest;
+    }
+
+        /*if (tree.root.left == null && tree.root.right == null) {
             //Reached root, save root as best
             double newDist = euclidean(vertX,tree.root.x,vertY,tree.root.y);
             if (newDist < currMin) {
                 best = tree.root;
+                globalMin = newDist;
                 return best;
             }
             return best;
         } else {
             if (axis == 0) {
                 if (!(tree.root.left == null)) {
-                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.left, best, newcurrMin);
+                    KdTreeNode currBest = closestHelper(depth + 1, searchVert, tree.root.left, best, currMin);
+                    double currentMin = euclidean(currBest.x,vertX,currBest.y,vertY);
                     if (!(tree.root.right == null)) {
-                        if (euclidean(currBest.x,vertX,currBest.y,vertY) >= tree.root.right.root.x) {
-                            currBest = closestHelper(depth + 1, vertGiven, tree.root.right, best, newcurrMin);
+                        if (vertX + tree.root.x < currentMin) {
+                            currBest = closestHelper(depth + 1, searchVert, tree.root.right, best, currentMin);
                             return currBest;
                         }
 
@@ -323,10 +391,11 @@ public class GraphDB {
                 }
             } else if (axis == 1) {
                 if (!(tree.root.left == null)) {
-                    KdTreeNode currBest = closestHelper(depth + 1, vertGiven, tree.root.left, best, newcurrMin);
+                    KdTreeNode currBest = closestHelper(depth + 1, searchVert, tree.root.left, best, currMin);
+                    double currentMin = euclidean(currBest.x,vertX,currBest.y,vertY);
                     if (!(tree.root.right == null)) {
-                        if (vertY + euclidean(currBest.x,vertX,currBest.y,vertY) >= tree.root.right.root.y) {
-                            currBest = closestHelper(depth + 1, vertGiven, tree.root.right, best, newcurrMin);
+                        if (vertY + tree.root.y < currentMin) {
+                            currBest = closestHelper(depth + 1, searchVert, tree.root.right, best, currentMin);
                             return currBest;
                         }
                     }
@@ -334,8 +403,8 @@ public class GraphDB {
                 }
             }
             return best;
-        }
-    }
+        }*/
+
 
     /**
      * Return the Euclidean x-value for some point, p, in Berkeley. Found by computing the

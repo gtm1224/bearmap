@@ -133,5 +133,9 @@ function kdtree (list of points pointList, int depth)
     return node;
 }
 
-
-
+Since the hyperplanes are all axis-aligned this
+is implemented as a simple comparison to see
+whether the distance between the splitting
+coordinate of the search point and current node
+is lesser than the distance (overall coordinates
+) from the search point to the current best.
