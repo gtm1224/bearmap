@@ -94,7 +94,7 @@ public class GraphDB {
             return currKDTree.root;
         }
         currKDTree.root = new KdTreeNode(listVert.get((listVert.size() / 2)));
-        ArrayList<Vertex> first = new ArrayList<>(listVert.subList(0, listVert.size() / 2 - 1));
+        ArrayList<Vertex> first = new ArrayList<>(listVert.subList(0, listVert.size() / 2));
         ArrayList<Vertex> second =
                 new ArrayList<>(listVert.subList((listVert.size() / 2)+1, listVert.size()));
         currKDTree.root.left = new KDT(null);
@@ -296,7 +296,6 @@ public class GraphDB {
         return closestNode.vert.vertID;
     }
 
-    private double globalMin = 0;
 
     public KdTreeNode closestHelper(int depth, Vertex searchVert, KDT tree, KdTreeNode best) {
         int axis = depth % 2;
@@ -321,7 +320,7 @@ public class GraphDB {
                 if (gcCurrNode < gcBestNode) {
                     currentBest = currentNode;
                 }
-                if (currentBest.x - queryX < newMin) {
+                if (euclidean(currentBest.x ,queryX, 0 ,0) < newMin) {
                     KdTreeNode currentRoot = currentBest;
                     if (!(tree.root.right == null)) {
                         KdTreeNode currentBest2 = closestHelper
