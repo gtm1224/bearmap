@@ -1,0 +1,3 @@
+I submitted the project late becuase I started late and KD-tree took more time than I thought it would.  I found
+the implementation difficult and unintuitive.  In addidtion the time constraints of closest proved difficult
+for me to fix.

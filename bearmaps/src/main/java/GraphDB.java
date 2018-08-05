@@ -276,7 +276,6 @@ public class GraphDB {
 
     public KdTreeNode closestHelper(int depth, Vertex searchVert, KDT tree, KdTreeNode best) {
         int axis = depth % 2;
-        System.out.println(axis);
         double queryX = projectToX(searchVert.lon, searchVert.lat);
         double queryY = projectToY(searchVert.lon, searchVert.lat);
         KdTreeNode currentBest = best;
@@ -301,10 +300,8 @@ public class GraphDB {
                 if (euclidean(currentBest.x, queryX, 0, 0) < newMin) {
                     KdTreeNode currentRoot = currentBest;
                     if (!(tree.root.right == null)) {
-                        System.out.println(currentRoot.vert.vertID);
                         KdTreeNode currentBest2 = closestHelper
                                 (depth + 1, searchVert, tree.root.right, currentRoot);
-                        System.out.println(currentBest2.vert.vertID);
                         double gcCurrRoot = distance(searchVert.vertID, currentRoot.vert.vertID);
                         double gcBestNode2 = distance(currentBest2.vert.vertID, searchVert.vertID);
                         if (gcCurrRoot < gcBestNode2) {

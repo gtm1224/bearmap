@@ -56,13 +56,8 @@ public class Router {
         public List<Long> shortestPath(GraphDB graph, double stlon, double stlat,
                                        double destlon, double destlat) {
             //Find vertices first
-            System.out.println("Entering closest");
             GraphDB.Vertex startVert = g.getVert(g.closest(stlon, stlat));
-            System.out.println("returned startVert" + startVert.vertID);
-            System.out.println();
-            System.out.println("Entering endVert");
             GraphDB.Vertex endVert = g.getVert(g.closest(destlon, destlat));
-            System.out.println("returned endVert" + endVert.vertID);
             fringe.add(startVert);
             path.put(startVert.vertID, startVert.vertID);
             bestNodeDistances.put(startVert.vertID, 0.0);

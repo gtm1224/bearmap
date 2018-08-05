@@ -19,17 +19,20 @@
       <file leaf-file-name="GraphDB.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/GraphDB.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="350" lean-forward="true" selection-start-line="350" selection-end-line="350" />
+            <state relative-caret-position="-155">
+              <caret line="136" column="65" lean-forward="true" selection-start-line="136" selection-start-column="65" selection-end-line="136" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7396#7397#0" expanded="true" />
                 <element signature="e#7439#7440#0" expanded="true" />
-                <element signature="e#17828#17829#0" expanded="true" />
-                <element signature="e#17874#17875#0" expanded="true" />
-                <element signature="e#18308#18309#0" expanded="true" />
-                <element signature="e#18354#18355#0" expanded="true" />
-                <element signature="class#Edge#0;class#GraphDB#0" />
+                <element signature="e#15669#15670#0" expanded="true" />
+                <element signature="e#15715#15716#0" expanded="true" />
+                <element signature="e#16149#16150#0" expanded="true" />
+                <element signature="e#16195#16196#0" expanded="true" />
+                <element signature="e#19374#19375#0" expanded="true" />
+                <element signature="e#19460#19461#0" expanded="true" />
+                <element signature="e#21550#21551#0" expanded="true" />
+                <element signature="e#21606#21607#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -38,8 +41,8 @@
       <file leaf-file-name="Router.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Router.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="63" selection-start-line="63" selection-end-line="63" />
+            <state relative-caret-position="102">
+              <caret line="59" column="76" selection-start-line="59" selection-start-column="76" selection-end-line="59" selection-end-column="76" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,8 +53,20 @@
       <file leaf-file-name="TestRouterTiny.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/TestRouterTiny.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="42" column="88" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="88" />
+            <state relative-caret-position="143">
+              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+              <folding>
+                <element signature="method#test22to66#0;class#TestRouterTiny#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="explanation.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/explanation.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -67,7 +82,6 @@
       <find>allVert</find>
       <find>allVertices</find>
       <find>Way Name</find>
-      <find>closes</find>
       <find>remove</find>
       <find>allEdges</find>
       <find>System</find>
@@ -85,11 +99,12 @@
       <find>arrayListVertices</find>
       <find>euclidian</find>
       <find>syste</find>
-      <find>system</find>
       <find>system.out</find>
       <find>addVert</find>
       <find>remov</find>
       <find>closest</find>
+      <find>closes</find>
+      <find>system</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -105,6 +120,7 @@
         <option value="$PROJECT_DIR$/src/test/java/TestGraphBuilding.java" />
         <option value="$PROJECT_DIR$/src/main/java/A*search.txt" />
         <option value="$PROJECT_DIR$/src/main/java/Rasterer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/explanation.txt" />
         <option value="$PROJECT_DIR$/src/test/java/TestRouterTiny.java" />
         <option value="$PROJECT_DIR$/src/main/java/Router.java" />
         <option value="$PROJECT_DIR$/src/main/java/GraphDB.java" />
@@ -361,27 +377,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestRouterTiny - 2018.08.04 at 23h 31m 53s.xml">
-      <configuration name="TestRouterTiny" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestRouterTiny - 2018.08.04 at 23h 34m 09s.xml">
-      <configuration name="TestRouterTiny" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestRouterTiny - 2018.08.04 at 23h 34m 49s.xml">
-      <configuration name="TestRouterTiny" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestRouterTiny - 2018.08.04 at 23h 34m 51s.xml">
-      <configuration name="TestRouterTiny" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestRouterTiny - 2018.08.04 at 23h 39m 57s.xml">
-      <configuration name="TestRouterTiny" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestRouterTiny - 2018.08.04 at 23h 40m 41s.xml">
-      <configuration name="TestRouterTiny" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestRouterTiny - 2018.08.04 at 23h 47m 37s.xml">
-      <configuration name="TestRouterTiny" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestRouterTiny - 2018.08.04 at 23h 48m 18s.xml">
       <configuration name="TestRouterTiny" configurationId="JUnit" />
     </history-entry>
@@ -391,10 +386,30 @@
     <history-entry file="TestRouterTiny - 2018.08.04 at 23h 50m 54s.xml">
       <configuration name="TestRouterTiny" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="TestRouterTiny - 2018.08.05 at 00h 36m 43s.xml">
+      <configuration name="TestRouterTiny" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestRouterTiny - 2018.08.05 at 00h 57m 44s.xml">
+      <configuration name="TestRouterTiny" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestRouterTiny - 2018.08.05 at 00h 58m 54s.xml">
+      <configuration name="TestRouterTiny" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestRouterTiny - 2018.08.05 at 00h 59m 08s.xml">
+      <configuration name="TestRouterTiny" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestRouterTiny - 2018.08.05 at 11h 01m 06s.xml">
+      <configuration name="TestRouterTiny" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestRouterTiny - 2018.08.05 at 11h 01m 43s.xml">
+      <configuration name="TestRouterTiny" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestRouterTiny - 2018.08.05 at 11h 02m 34s.xml">
+      <configuration name="TestRouterTiny" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="25" width="1319" height="743" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="8" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -405,9 +420,9 @@
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003791" side_tool="true" weight="0.47559056" />
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4996209" weight="0.46929133" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4996209" visible="true" weight="0.46929133" />
       <window_info anchor="right" id="Coverage" order="0" side_tool="true" weight="0.3297953" />
-      <window_info active="true" anchor="bottom" id="Style Checker" order="7" visible="true" weight="0.32440946" />
+      <window_info anchor="bottom" id="Style Checker" order="7" weight="0.32440946" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32755905" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
@@ -440,13 +455,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Router.java</url>
-          <line>59</line>
+          <line>58</line>
           <properties />
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Router.java</url>
-          <line>63</line>
+          <line>59</line>
           <properties />
           <option name="timeStamp" value="89" />
         </line-breakpoint>
@@ -492,11 +507,14 @@
             <element signature="imports" expanded="true" />
             <element signature="e#7396#7397#0" expanded="true" />
             <element signature="e#7439#7440#0" expanded="true" />
-            <element signature="e#17828#17829#0" expanded="true" />
-            <element signature="e#17874#17875#0" expanded="true" />
-            <element signature="e#18308#18309#0" expanded="true" />
-            <element signature="e#18354#18355#0" expanded="true" />
-            <element signature="class#Edge#0;class#GraphDB#0" />
+            <element signature="e#15669#15670#0" expanded="true" />
+            <element signature="e#15715#15716#0" expanded="true" />
+            <element signature="e#16149#16150#0" expanded="true" />
+            <element signature="e#16195#16196#0" expanded="true" />
+            <element signature="e#19374#19375#0" expanded="true" />
+            <element signature="e#19460#19461#0" expanded="true" />
+            <element signature="e#21550#21551#0" expanded="true" />
+            <element signature="e#21606#21607#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -537,11 +555,14 @@
             <element signature="imports" expanded="true" />
             <element signature="e#7396#7397#0" expanded="true" />
             <element signature="e#7439#7440#0" expanded="true" />
-            <element signature="e#17828#17829#0" expanded="true" />
-            <element signature="e#17874#17875#0" expanded="true" />
-            <element signature="e#18308#18309#0" expanded="true" />
-            <element signature="e#18354#18355#0" expanded="true" />
-            <element signature="class#Edge#0;class#GraphDB#0" />
+            <element signature="e#15669#15670#0" expanded="true" />
+            <element signature="e#15715#15716#0" expanded="true" />
+            <element signature="e#16149#16150#0" expanded="true" />
+            <element signature="e#16195#16196#0" expanded="true" />
+            <element signature="e#19374#19375#0" expanded="true" />
+            <element signature="e#19460#19461#0" expanded="true" />
+            <element signature="e#21550#21551#0" expanded="true" />
+            <element signature="e#21606#21607#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -796,17 +817,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/explanation.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/TestRouterTiny.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="42" column="88" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="88" />
+        <state relative-caret-position="143">
+          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+          <folding>
+            <element signature="method#test22to66#0;class#TestRouterTiny#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Router.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        <state relative-caret-position="102">
+          <caret line="59" column="76" selection-start-line="59" selection-start-column="76" selection-end-line="59" selection-end-column="76" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -815,17 +846,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GraphDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="350" lean-forward="true" selection-start-line="350" selection-end-line="350" />
+        <state relative-caret-position="-155">
+          <caret line="136" column="65" lean-forward="true" selection-start-line="136" selection-start-column="65" selection-end-line="136" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7396#7397#0" expanded="true" />
             <element signature="e#7439#7440#0" expanded="true" />
-            <element signature="e#17828#17829#0" expanded="true" />
-            <element signature="e#17874#17875#0" expanded="true" />
-            <element signature="e#18308#18309#0" expanded="true" />
-            <element signature="e#18354#18355#0" expanded="true" />
-            <element signature="class#Edge#0;class#GraphDB#0" />
+            <element signature="e#15669#15670#0" expanded="true" />
+            <element signature="e#15715#15716#0" expanded="true" />
+            <element signature="e#16149#16150#0" expanded="true" />
+            <element signature="e#16195#16196#0" expanded="true" />
+            <element signature="e#19374#19375#0" expanded="true" />
+            <element signature="e#19460#19461#0" expanded="true" />
+            <element signature="e#21550#21551#0" expanded="true" />
+            <element signature="e#21606#21607#0" expanded="true" />
           </folding>
         </state>
       </provider>
