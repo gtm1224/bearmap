@@ -26,25 +26,32 @@ public class TestRouterTiny {
 
     @Test
     public void test22to66() {
+        System.out.println("====Test22to66====");
         List<Long> actual = Router.shortestPath(graphTiny, -122.27, 37.84, -122.23, 37.88);
         List<Long> expected = new ArrayList<>();
         expected.add(22L);
         expected.add(46L);
         expected.add(66L);
         assertEquals("Best path from 22 to 66 is incorrect.", expected, actual);
+        System.out.println(expected);
+        System.out.println();
     }
 
     @Test
     public void test22to11() {
+        System.out.println("====Test22to11====");
         List<Long> actual = Router.shortestPath(graphTiny, -122.27, 37.84, -122.28,37.83);
         List<Long> expected = new ArrayList<>();
         expected.add(22L);
         expected.add(11L);
         assertEquals(expected, actual);
+        System.out.println(expected);
+        System.out.println();
     }
 
     @Test
     public void test41to46() {
+        System.out.println("====Test41to46====");
         List<Long> actual = Router.shortestPath(graphTiny, -122.25, 37.83, -122.25, 37.88);
         List<Long> expected = new ArrayList<>();
         expected.add(41L);
@@ -52,15 +59,20 @@ public class TestRouterTiny {
         expected.add(66L);
         expected.add(46L);
         assertEquals(expected, actual);
+        System.out.println(expected);
+        System.out.println();
     }
 
     @Test
     public void test66to55() {
+        System.out.println("====Test66to55====");
         List<Long> actual = Router.shortestPath(graphTiny, -122.23, 37.88, -122.24, 37.87);
         List<Long> expected = new ArrayList<>();
         expected.add(66L);
         expected.add(63L);
         expected.add(55L);
         assertEquals(expected, actual);
+        System.out.println(expected);
+        System.out.println();
     }
 }

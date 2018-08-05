@@ -60,8 +60,6 @@ public class GraphDB {
             e.printStackTrace();
         }
         clean();
-
-
         ArrayList<Vertex> listVert = arrayListVertices();
         Collections.sort(listVert, new Vertex.SortByX());
         //sort by uclidean distance from root lot and lan
@@ -278,6 +276,7 @@ public class GraphDB {
 
     public KdTreeNode closestHelper(int depth, Vertex searchVert, KDT tree, KdTreeNode best) {
         int axis = depth % 2;
+        System.out.println(axis);
         double queryX = projectToX(searchVert.lon, searchVert.lat);
         double queryY = projectToY(searchVert.lon, searchVert.lat);
         KdTreeNode currentBest = best;
@@ -288,6 +287,9 @@ public class GraphDB {
             if (!(tree.root.left == null)) {
                 KdTreeNode currentNode = tree.root;
                 currentBest = closestHelper(depth + 1, searchVert, tree.root.left, currentNode);
+                System.out.println("Accessed following nodes in axis == 0");
+                System.out.println("currentNode is " + currentNode.vert.vertID);
+                System.out.println("currentBest is " + currentBest.vert.vertID);
                 double euclidCurrNode = euclidean(currentNode.x, queryX, currentNode.y, queryY);
                 double euclidBestNode = euclidean(currentBest.x, queryX, currentBest.y, queryY);
                 double gcCurrNode = distance(currentNode.vert.vertID, searchVert.vertID);
@@ -302,8 +304,11 @@ public class GraphDB {
                 if (euclidean(currentBest.x, queryX, 0, 0) < newMin) {
                     KdTreeNode currentRoot = currentBest;
                     if (!(tree.root.right == null)) {
+                        System.out.println("Accessed right root in axis == 0");
+                        System.out.println(currentRoot.vert.vertID);
                         KdTreeNode currentBest2 = closestHelper
                                 (depth + 1, searchVert, tree.root.right, currentRoot);
+                        System.out.println(currentBest2.vert.vertID);
                         double euclidCurrRoot = euclidean
                                 (currentRoot.x, queryX, currentRoot.y, queryY);
                         double gcCurrRoot = distance(searchVert.vertID, currentRoot.vert.vertID);
@@ -323,6 +328,9 @@ public class GraphDB {
             if (!(tree.root.left == null)) {
                 KdTreeNode currentNode = tree.root;
                 currentBest = closestHelper(depth + 1, searchVert, tree.root.left, currentNode);
+                System.out.println("Accessed these nodes in axis == 1");
+                System.out.println("currentNode is " + currentNode.vert.vertID);
+                System.out.println("currentBest is " + currentBest.vert.vertID);
                 double euclidCurrNode = euclidean(currentNode.x, queryX, currentNode.y, queryY);
                 double euclidBestNode = euclidean(currentBest.x, queryX, currentBest.y, queryY);
                 double gcCurrNode = distance(currentNode.vert.vertID, searchVert.vertID);
@@ -334,11 +342,14 @@ public class GraphDB {
                 if (gcCurrNode < gcBestNode) {
                     currentBest = currentNode;
                 }
-                if ((currentBest.y - queryY) < newMin) { // check if in other tree
+                if (euclidean(0,0,currentBest.y,queryY) < newMin) { // check if in other tree
                     KdTreeNode currentRoot = currentBest;
+                    System.out.println("Accessed right subtree in axis == 1");
+                    System.out.println("currentRoot is " + currentBest.vert.vertID);
                     if (!(tree.root.right == null)) {
                         KdTreeNode currentBest2 = closestHelper
                                 (depth + 1, searchVert, tree.root.right, currentRoot);
+                        System.out.println("currentBest2 is " + currentBest2.vert.vertID);
                         double euclidCurrRoot =
                                 euclidean(currentRoot.x, queryX, currentRoot.y, queryY);
                         double gcCurrRoot = distance(currentRoot.vert.vertID, searchVert.vertID);
