@@ -302,15 +302,16 @@ public class GraphDB {
         }
         double euclidCurrRoot = euclidean(currentRoot.x, queryX, currentRoot.y, queryY);
         double euclidBestNode = euclidean(currentBest.x, queryX, currentBest.y, queryY);
-        double gcCurrNode = distance(currentRoot.vert.vertID, searchVert.vertID);
-        double gcBestNode = distance(currentBest.vert.vertID, searchVert.vertID);
+        //double gcCurrNode = distance(currentRoot.vert.vertID, searchVert.vertID);
+        //double gcBestNode = distance(currentBest.vert.vertID, searchVert.vertID);
         double newMin = euclidBestNode;
         if (euclidCurrRoot < euclidBestNode) {
             newMin = euclidCurrRoot;
-        }
-        if (gcCurrNode < gcBestNode) {
             currentBest = currentRoot;
         }
+        /*if (gcCurrNode < gcBestNode) {
+            currentBest = currentRoot;
+        }*/
         double dimCurrentBest = 0.0;
         double euclidCheckHyperPlane = 0.0;
         if (axis == 0) {
@@ -341,9 +342,11 @@ public class GraphDB {
                 currentBest2 = closestHelper
                         (depth + 1, queryX, queryY, tree.root.right, tree.root, searchVert);
             }
-            double gcCurrRoot2 = distance(searchVert.vertID, currentRoot2.vert.vertID);
-            double gcBestNode2 = distance(currentBest2.vert.vertID, searchVert.vertID);
-            if (gcCurrRoot2 < gcBestNode2) {
+            /*double gcCurrRoot2 = distance(searchVert.vertID, currentRoot2.vert.vertID);
+            double gcBestNode2 = distance(currentBest2.vert.vertID, searchVert.vertID);*/
+            euclidCurrRoot = euclidean(currentRoot2.x, queryX, currentRoot2.y, queryY);
+            euclidBestNode = euclidean(currentBest2.x, queryX, currentBest2.y, queryY);
+            if (euclidCurrRoot < euclidBestNode) {
                 return currentRoot2;
             }
             return currentBest2;
