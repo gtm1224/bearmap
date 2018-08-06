@@ -100,6 +100,9 @@ public class Router {
             int counter = 0;
             while (!(current == startVert.vertID)) {
                 returnPath.add(current);
+                if (!returnPath.add(current)) {
+                    return new ArrayList<Long>();
+                }
                 current = path.get(current);
                 //returnPath.add(endVert.vertID);
             }
